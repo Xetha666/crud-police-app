@@ -10,38 +10,90 @@ import Layout from "@/layouts/Layout.astro";
       <table class="table table-lg w-full">
         <thead>
           <tr class="bg-base-200">
-            <th rowspan="2" class="text-center">#</th>
-            <th rowspan="2">SUB UNIDAD y/o SITUACIÓN</th>
-            <th rowspan="2">SEDE DEPINCRI</th>
-            <th rowspan="2">AREA Y/U OFICINA</th>
-            <th rowspan="2">GRADO</th>
-            <th rowspan="2">APELLIDOS Y NOMBRES</th>
+            <th rowspan="5" class="text-center">#</th>
+            <th rowspan="5">SUB UNIDAD y/o SITUACIÓN</th>
+            <th rowspan="5">SEDE DEPINCRI</th>
+            <th rowspan="5">AREA Y/U OFICINA</th>
+            <th rowspan="5">GRADO</th>
+            <th rowspan="5">APELLIDOS Y NOMBRES</th>
             <th colspan="3" class="text-center">NATURALEZA</th>
-            <th rowspan="2">FECHA NACIMIEN.</th>
-            <th rowspan="2">EDAD</th>
-            <th rowspan="2">DNI</th>
-            <th rowspan="2">CODIGO DNI</th>
-            <th rowspan="2">INGRESO PNP</th>
-            <th rowspan="2">EGRESO PNP</th>
-            <th colspan="3" class="text-center"
-              >TIEMPO DE SERVICIOS (Reales y Efectivos)</th
-            >
-            <th rowspan="2">CODIGO y/o ESPECIALIDAD</th>
-            <th rowspan="3">CARNET DE IDENTIDAD PERSONAL (CIP)</th>
+            <th rowspan="5">FECHA NACIMIEN.</th>
+            <th rowspan="5">EDAD</th>
+            <th rowspan="5">DNI</th>
+            <th rowspan="5">CODIGO DNI</th>
+            <th rowspan="5">INGRESO PNP</th>
+            <th rowspan="5">EGRESO PNP</th>
+            <th colspan="3" class="text-center">TIEMPO DE SERVICIOS (Reales y Efectivos)</th>
+            <th rowspan="5">CODIGO y/o ESPECIALIDAD</th>
+            <th colspan="4" class="text-center">CARNET DE IDENTIDAD PERSONAL (CIP)</th>
+            <th rowspan="5">ULTIMO ASCENSO</th>
+            <th rowspan="5">INCORP. DIVPOL-CHYO</th>
+            <th rowspan="5">GRUPO SANG.</th>
+            <th rowspan="5">INCORP. DEPINCRI</th>
+            <th rowspan="5">CARGO</th>
+            <th rowspan="5">CODIGO CARGO</th>
+            <th rowspan="5">FUNCION Y HORARIO</th>
+            <th rowspan="5">APTITUD PSICOSOMATICA</th>
+            <th rowspan="5">PROCEDENCIA</th>
+            <th rowspan="5">SE INCORPORA AL DEPINCRI EN CALIDAD DE</th>
+            <th colspan="40" class="text-center">ARMAMENTO DE USO PARTICULAR Y/O DE EL ESTADO</th>
+            
+
           </tr>
           <tr class="bg-base-200">
-            <th class="text-center">DISTRITO</th>
-            <th class="text-center">PROVINCIA</th>
-            <th class="text-center">DEPTO</th>
-
-            <th class="text-center">AÑOS</th>
-            <th class="text-center">MESES</th>
-            <th class="text-center">DIAS</th>
-
-            <th class="text-center">ANTIGUO y/o CODOFÍN</th>
-            <th class="text-center">CIP</th>
-            <th class="text-center">SIT CIP</th>
+            <th class="text-center" rowspan="4">DISTRITO</th>
+            <th class="text-center" rowspan="4">PROVINCIA</th>
+            <th class="text-center" rowspan="4">DEPTO</th>
+            <th class="text-center" rowspan="4">AÑOS</th>
+            <th class="text-center" rowspan="4">MESES</th>
+            <th class="text-center" rowspan="4">DIAS</th>
+            <th class="text-center" rowspan="4">ANTIGUO y/o CODOFÍN</th>
+            <th class="text-center" rowspan="4">CIP</th>
+            <th class="text-center" rowspan="4">SIT CIP</th>
+            <th class="text-center" rowspan="4">FECHA (Expedicion y/o Pérdida)</th>
+            <th class="text-center border border-white" colspan="12">PARTICULAR</th>            
+            <th class="text-center border border-white" colspan="12">ESTADO</th>            
           </tr>
+
+          <tr class="bg-base-100 text-center">
+            <th class="text-center" rowspan="3">TIPO</th>
+            <th class="text-center" rowspan="3">MARCA</th>
+            <th class="text-center" rowspan="3">MODELO</th>
+            <th class="text-center" rowspan="3">CALIBRE</th>
+            <th class="text-center" rowspan="3">N° SERIE</th>
+            <th class="text-center" colspan="5">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
+            <th class="text-center" colspan="2">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
+            <th class="text-center" rowspan="3">TIPO</th>
+            <th class="text-center" rowspan="3">MARCA</th>
+            <th class="text-center" rowspan="3">MODELO</th>
+            <th class="text-center" rowspan="3">CALIBRE</th>
+            <th class="text-center" rowspan="3">N° SERIE</th>
+            <th class="text-center" colspan="5">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
+            <th class="text-center" colspan="2">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
+          </tr>
+
+          <tr class="bg-base-100 text-center">
+            <th class="text-center" rowspan="2">N° CAF</th>
+            <th class="text-center" colspan="2">FECHA</th>
+            <th class="text-center" rowspan="2">LIBRO</th>
+            <th class="text-center" rowspan="2">FOLIO</th>
+            <th class="text-center" rowspan="2">N°</th>
+            <th class="text-center" rowspan="2">FECHA EMISIÓN</th>
+            <th class="text-center" rowspan="2">N° CAF</th>
+            <th class="text-center" colspan="2">FECHA</th>
+            <th class="text-center" rowspan="2">LIBRO</th>
+            <th class="text-center" rowspan="2">FOLIO</th>
+            <th class="text-center" rowspan="2">N°</th>
+            <th class="text-center" rowspan="2">FECHA EMISIÓN</th>
+          </tr>
+
+          <tr class="bg-base-100 text-center">
+            <th class="text-center">EXPEDIC.</th>
+            <th class="text-center">CADUCA</th>
+            <th class="text-center">EXPEDIC.</th>
+            <th class="text-center">CADUCA</th>
+          </tr>
+
         </thead>
 
         <tbody>
@@ -67,6 +119,7 @@ import Layout from "@/layouts/Layout.astro";
             <td class="text-center">X</td>
             <td class="text-center">-</td>
           </tr>
+
         </tbody>
       </table>
     </div>
