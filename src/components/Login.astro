@@ -11,7 +11,7 @@ import Arrow from "/public/svg/arrow-back.svg";
   >
     Login
   </h1>
-  <form method="POST" action="" class="flex items-center justify-center">
+  <form id="login-form" method="POST" class="flex items-center justify-center">
     <fieldset
       class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
     >
@@ -25,8 +25,24 @@ import Arrow from "/public/svg/arrow-back.svg";
         name="password"
         placeholder="Password"
       />
-
+      <p id="error-message" class="text-error text-sm mt-2 hidden"></p>
       <button class="btn btn-neutral mt-4">Login</button>
     </fieldset>
   </form>
 </div>
+
+<script>
+  import type { LoginPayload } from "@/types/login";
+
+  const form = document.getElementById('login-form');
+  const errorMessage = document.getElementById('error-message');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const target = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(target);
+    const payload = Object.fromEntries(formData.entries()) as unknown as LoginPayload;
+    console.log('Submitting login with payload:', payload);
+  })
+</script>
+
