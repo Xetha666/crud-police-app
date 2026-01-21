@@ -1,5 +1,7 @@
 ---
-
+import { db, User as UserTable } from 'astro:db';
+const Users = await db.select().from(UserTable);
+const {username} = Users[0];
 ---
 
 <div class="flex items-center justify-center gap-2 fixed top-2 w-full h-26">
@@ -10,7 +12,7 @@
     </div>
 
     <div class="flex flex-col">
-      <p class="font-semibold text-2xl">¡Hola bienvenido Edgard!</p>
+      <p class="font-semibold text-2xl">¡Hola bienvenido {`${username}`}!</p>
       <div class="btn mt-4">Cerrar sesión</div>
     </div>
 </div>
