@@ -44,14 +44,10 @@ import Arrow from "/public/svg/arrow-back.svg";
     const Username = formData.get('username');
     const Password = formData.get('password');
 
-    console.log('Enviando datos:', { Username, Password });
-
     const payload: LoginPayload = {
       username: Username as string,
       password: Password as string,
     };
-
-    console.log('Payload:', payload);
 
     try{
       const response = await fetch('/api/login', {
