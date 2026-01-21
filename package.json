@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/db": "^0.18.3",
+    "@astrojs/vercel": "^9.0.4",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.11",
     "bcryptjs": "^3.0.3",
