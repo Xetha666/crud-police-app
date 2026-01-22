@@ -5,6 +5,8 @@ const User = defineTable({
     id: column.text({ primaryKey: true }),
     username: column.text({ unique: true }),
     password: column.text(),
+    name: column.text({ optional: true }),
+    createdAt: column.date({ default: new Date() }),
   }
 })
 
