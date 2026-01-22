@@ -2,6 +2,6 @@ import { db, User } from 'astro:db';
 
 export default async function seed() {
   await db.insert(User).values([
-    { id: "1", username: "Edgard", password: "Edgard1" }
+    { id: "1", username: "Edgard2692", password: "Esaro2692@", name: "Edgard" }
   ]);	
 }
