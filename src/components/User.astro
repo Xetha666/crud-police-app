@@ -1,18 +1,32 @@
 ---
-import { db, User as UserTable } from 'astro:db';
-const Users = await db.select().from(UserTable);
-const {name} = Users[0];
+const user = Astro.locals.user;
+
+// Si por alguna razón el middleware fallara, usamos un fallback
+const name = user?.name || "Invitado";
+const initial = name.charAt(0).toUpperCase();
 ---
 
 <div class="flex items-center justify-center gap-2 fixed top-2 w-full h-26">
     <div class="avatar avatar-online placeholder">
         <div class="bg-neutral text-neutral-content size-24 rounded-full flex justify-center items-center">
-        <span class="text-5xl">E</span>
+            <span class="text-5xl">{initial}</span>
         </div>
     </div>
 
     <div class="flex flex-col">
-      <p class="font-semibold text-2xl">¡Hola bienvenido {`${name}`}!</p>
-      <div class="btn mt-4">Cerrar sesión</div>
+      <p class="font-semibold text-2xl">¡Hola bienvenido {name}!</p>
+      <div id="logout-button" class="btn mt-4 cursor-pointer">Cerrar sesión</div>
     </div>
 </div>
+
+<script>
+    const logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+    logoutButton?.addEventListener('click', async () => {
+        const response = await fetch('/api/logout', {
+            method: 'POST',
+        })
+        if(response.ok || response.redirected) {
+            window.location.href = '/login';
+        }
+    })
+</script>
