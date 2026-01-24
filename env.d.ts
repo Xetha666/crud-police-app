@@ -3,6 +3,7 @@
 interface UserSession {
   id: number;
   username: string;
+  name: string;
 }
 
 declare namespace App {
