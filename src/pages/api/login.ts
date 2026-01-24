@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
-import { and, db, eq, User } from "astro:db";
+import { db, eq, User } from "astro:db";
+import bcrypt from "bcryptjs";
 import { SignJWT } from "jose";
 
 const SECRET = new TextEncoder().encode(import.meta.env.JWT_SECRET);
@@ -17,13 +18,24 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     );
   }
   try {
-    const userFound = await db.select().from(User).where(and(eq(User.username, username),eq(User.password, password))).get();
+    const userFound = await db.select().from(User).where(eq(User.username, username)).get();
+    
     if (!userFound) {
         return new Response(
           JSON.stringify({ error: "Credenciales incorrectas." }),
           { status: 401 }
         );
       }
+    
+      //COMPARACIÓN SEGURA: Comparamos el password plano con el hash de la DB
+    const isPasswordValid = await bcrypt.compare(password, userFound.password);
+
+    if (!isPasswordValid) {
+      return new Response(
+        JSON.stringify({ error: "Credenciales incorrectas." }),
+        { status: 401 }
+      );
+    }
 
       // --- PASO CLAVE: CREACIÓN DEL TOKEN ---
       const token = await new SignJWT({ 
