@@ -9,8 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/db": "^0.18.3",
-    "@astrojs/vercel": "^8.0.4",
+    "@astrojs/db": "^0.19.0",
+    "@astrojs/vercel": "^9.0.4",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.11",
     "bcryptjs": "^3.0.3",
@@ -19,5 +19,8 @@
   },
   "devDependencies": {
     "daisyui": "^5.5.14"
+  },
+  "overrides": {
+    "path-to-regexp": "6.3.0"
   }
 }
