@@ -1,0 +1,253 @@
+---
+---
+<div class="p-4">
+    <div class="flex justify-end mb-4">
+      <button class="btn btn-success text-white shadow-lg" onclick="add_modal.showModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        AGREGAR PERSONAL
+      </button>
+    </div>
+
+    <div class="overflow-x-auto rounded-box border border-white bg-base-200 shadow-xl">
+      <table class="table table-lg w-full select-none">
+        </table>
+    </div>
+</div>
+
+<dialog id="add_modal" class="modal backdrop:backdrop-blur-md">
+  <div class="modal-box w-11/12 max-w-[95vw] h-[90vh] bg-base-200 border border-white p-0 flex flex-col overflow-hidden">
+    <div class="bg-neutral p-4 text-neutral-content flex justify-between items-center border-b border-white sticky top-0 z-20">
+      <h3 class="font-bold text-xl uppercase">Ficha Integral de Registro de Personal</h3>
+      <button class="btn btn-circle btn-ghost btn-sm" onclick="add_modal.close()">✕</button>
+    </div>
+    
+    <form method="dialog" class="m-6 overflow-y-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="flex flex-col gap-3">
+          <h4 class="font-bold text-primary border-b border-primary/40 text-xs">I. IDENTIDAD Y GRADO</h4>
+          <input type="file" class="file-input file-input-bordered file-input-xs w-full" accept="image/*" />
+          <input type="text" placeholder="SUB UNIDAD / SITUACIÓN" class="input input-bordered input-xs w-full" />
+          <input type="text" placeholder="SEDE DEPINCRI" class="input input-bordered input-xs w-full" />
+          <input type="text" placeholder="AREA Y/U OFICINA" class="input input-bordered input-xs w-full" />
+          <input type="text" placeholder="GRADO" class="input input-bordered input-xs w-full" />
+          <input type="text" placeholder="APELLIDOS Y NOMBRES" class="input input-bordered input-xs w-full font-bold" />
+          <input type="text" placeholder="SEXO" class="input input-bordered input-xs w-full font-bold" />
+          
+          <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">NATURALEZA</p>
+            <div class="flex flex-col gap-1">
+                <input type="text" placeholder="Distrito" class="input input-bordered input-xs" />
+                <input type="text" placeholder="Provincia" class="input input-bordered input-xs" />
+                <input type="text" placeholder="Depto." class="input input-bordered input-xs" />
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <input type="date" class="input input-bordered input-xs flex-1" title="Fecha Nac." />
+            <input type="number" placeholder="EDAD" class="input input-bordered input-xs w-20" />
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 flex flex-col gap-3 bg-base-300/10 p-2 rounded-xl border border-white/5">
+          <h4 class="font-bold text-primary border-b border-primary/40 text-xs">II. INFORMACIÓN PNP</h4>
+          <div class="flex gap-1">
+            <input type="text" placeholder="DNI" class="input input-bordered input-xs w-1/2" maxlength="8" />
+            <input type="text" placeholder="COD DNI" class="input input-bordered input-xs w-1/2" />
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="date" class="input input-bordered input-xs" title="Ingreso PNP" />
+            <input type="date" class="input input-bordered input-xs" title="Egreso PNP" />
+          </div>
+          <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+            <p class="text-[9px] font-black opacity-60 mb-2">TIEMPO SERVICIO (Reales y Efectivos)</p>
+            <div class="grid grid-cols-3 gap-1">
+                <input type="text" placeholder="AÑOS" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MES" class="input input-bordered input-xs" />
+                <input type="text" placeholder="DIAS" class="input input-bordered input-xs" />
+            </div>
+          </div>
+          <input type="text" placeholder="CODIGO y/o ESPECIALIDAD" class="input input-bordered input-xs" />
+          <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CARNET DE IDENTIDAD PERSONAL (CIP)</p>
+            <div class="grid grid-cols-2 gap-1 mb-2">
+              <input type="text" placeholder="ANTIGUO y/o CODOFÍN" class="input input-bordered input-xs mb-1" />
+              <input type="text" placeholder="N° CIP" class="input input-bordered input-xs mb-1" />
+              <input type="text" placeholder="SIT CIP" class="input input-bordered input-xs mb-1" />
+              <input type="date" class="input input-bordered input-xs" title="FECHA (Expedición y/o Pérdida)" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" placeholder="ULTIMO ASCENSO" class="input input-bordered input-xs" />
+            <input type="text" placeholder="GRUPO SANG." class="input input-bordered input-xs" />
+            <input type="text" placeholder="INCORP. DIVPOL-CHYO" class="input input-bordered input-xs" />
+            <input type="text" placeholder="INCORP. DEPINCRI" class="input input-bordered input-xs" />
+            <input type="text" placeholder="CARGO" class="input input-bordered input-xs" />
+            <input type="text" placeholder="COD. CARGO" class="input input-bordered input-xs" />
+            <input type="text" placeholder="FUNCION Y HORARIO" class="input input-bordered input-xs" />
+            <select class="select select-bordered select-xs w-full min-h-6">
+                <option disabled selected>APTITUD PSICOSOM.</option>
+                <option>APTO</option>
+                <option>NO APTO</option>
+                <option>RESTRINGIDO</option>
+            </select>
+            <input type="text" placeholder="PROCEDENCIA" class="input input-bordered input-xs" />
+            <input type="text" placeholder="SE INCORPORA AL DEPINCRI EN CALIDAD DE" class="input input-bordered input-xs" />
+          </div>
+        </div>
+
+        <!--TODO:Revisar y Comparar los campos con el excel -->
+
+        <div class="flex flex-col gap-3">
+          <h4 class="font-bold text-primary border-b border-primary/40 text-xs text-center">III. ARMAMENTO PARTICULAR Y ESTADO</h4>
+          <div class="grid grid-cols-1 gap-4">
+            <div class="p-2 rounded-lg border border-warning/20 bg-warning/5">
+              <p class="text-[9px] font-black text-warning mb-2 uppercase">PARTICULAR</p>
+              <div class="grid grid-cols-2 gap-1 mb-2">
+                <input type="text" placeholder="TIPO" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MARCA" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MODELO" class="input input-bordered input-xs" />
+                <input type="text" placeholder="CALIBRE" class="input input-bordered input-xs" />
+              </div>
+              <input type="text" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />
+              <div class="grid grid-cols-2 gap-1">
+                <input type="text" placeholder="N° CAF" class="input input-bordered input-xs" />
+                <input type="text" placeholder="LIBRO/FOLIO" class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" title="Expedic." />
+                <input type="date" class="input input-bordered input-xs" title="Caduca" />
+              </div>
+              <div class="grid grid-cols-2 gap-1 mt-2">
+                <input type="text" placeholder="N° TARJETA" class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" title="Emisión" />
+              </div>
+            </div>
+            <div class="p-2 rounded-lg border border-info/20 bg-info/5">
+              <p class="text-[9px] font-black text-info mb-2 uppercase">ESTADO</p>
+              <div class="grid grid-cols-2 gap-1 mb-2">
+                <input type="text" placeholder="TIPO" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MARCA" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MODELO" class="input input-bordered input-xs" />
+                <input type="text" placeholder="CALIBRE" class="input input-bordered input-xs" />
+              </div>
+              <input type="text" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />
+              <div class="grid grid-cols-2 gap-1">
+                <input type="text" placeholder="N° CAF" class="input input-bordered input-xs" />
+                <input type="text" placeholder="LIBRO/FOLIO" class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" title="Expedic." />
+                <input type="date" class="input input-bordered input-xs" title="Caduca" />
+              </div>
+              <div class="grid grid-cols-2 gap-1 mt-2">
+                <input type="text" placeholder="N° TARJETA" class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" title="Emisión" />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h4 class="font-bold text-primary border-b border-primary/40 text-xs">IV. LICENCIAS DE CONDUCIR</h4>
+          <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">MAYOR (A)</p>
+            <div class="grid grid-cols-3 gap-1 mb-2">
+                <input type="text" placeholder="PAR" class="input input-bordered input-xs" />
+                <input type="text" placeholder="POL" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MIL" class="input input-bordered input-xs" />
+            </div>
+            <div class="grid grid-cols-2 gap-1">
+                <input type="text" placeholder="CLASE" class="input input-bordered input-xs" />
+                <input type="text" placeholder="CAT" class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" />
+            </div>
+          </div>
+          <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">MENOR (B)</p>
+            <div class="grid grid-cols-3 gap-1 mb-2">
+                <input type="text" placeholder="PAR" class="input input-bordered input-xs" />
+                <input type="text" placeholder="POL" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MIL" class="input input-bordered input-xs" />
+            </div>
+            <div class="grid grid-cols-2 gap-1">
+                <input type="text" placeholder="CLASE" class="input input-bordered input-xs" />
+                <input type="text" placeholder="CAT" class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h4 class="font-bold text-primary border-b border-primary/40 text-xs">V. DOMICILIO Y ECONOMÍA</h4>
+          <input type="text" placeholder="ESTADO CIVIL (EC)" class="input input-bordered input-xs" />
+          <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">DOMICILIO</p>
+            <input type="text" placeholder="DIRECCIÓN" class="input input-bordered input-xs mb-1" />
+            <input type="text" placeholder="REFERENCIA" class="input input-bordered input-xs mb-1" />
+            <div class="grid grid-cols-3 gap-1">
+                <input type="text" placeholder="Dist." class="input input-bordered input-xs" />
+                <input type="text" placeholder="Prov." class="input input-bordered input-xs" />
+                <input type="text" placeholder="Dep." class="input input-bordered input-xs" />
+            </div>
+          </div>
+          <div class="p-2 rounded-lg border border-success/30 bg-success/5">
+            <p class="text-[9px] font-black text-success mb-2 uppercase">BANCO DE LA NACIÓN</p>
+            <input type="text" placeholder="N° CUENTA" class="input input-bordered input-xs mb-1" />
+            <input type="text" placeholder="C.C.I" class="input input-bordered input-xs" />
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 flex flex-col gap-3">
+          <h4 class="font-bold text-primary border-b border-primary/40 text-xs">VI. COMUNICACIONES Y REASIGNACIÓN</h4>
+          <div class="grid grid-cols-2 gap-4">
+             <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+                <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CORREO</p>
+                <div class="grid grid-cols-2 gap-1 mb-1">
+                    <input type="email" placeholder="Gmail" class="input input-bordered input-xs" />
+                    <input type="email" placeholder="Hotmail" class="input input-bordered input-xs" />
+                </div>
+                <input type="email" placeholder="INSTITUCIONAL" class="input input-bordered input-xs" />
+             </div>
+             <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+                <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CELULAR</p>
+                <div class="grid grid-cols-5 gap-1">
+                    <input type="text" placeholder="RPC" class="input input-bordered input-xs" />
+                    <input type="text" placeholder="MOV" class="input input-bordered input-xs" />
+                    <input type="text" placeholder="ENT" class="input input-bordered input-xs" />
+                    <input type="text" placeholder="BIT" class="input input-bordered input-xs" />
+                    <input type="text" placeholder="WSP" class="input input-bordered input-xs" />
+                </div>
+             </div>
+          </div>
+          <div class="p-2 rounded-lg border border-error/30 bg-error/5 mt-2">
+            <p class="text-[9px] font-black text-error mb-2 uppercase">REASIGNADO / CAMBIADO</p>
+            <div class="grid grid-cols-4 gap-1">
+                <input type="text" placeholder="TIPO DOC" class="input input-bordered input-xs" />
+                <input type="text" placeholder="N°" class="input input-bordered input-xs" />
+                <input type="text" placeholder="PROCED." class="input input-bordered input-xs" />
+                <input type="date" class="input input-bordered input-xs" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-action sticky bottom-0 bg-base-200 py-4 border-t border-white/10 mt-6 flex justify-between z-20">
+        <button type="button" class="btn btn-error btn-outline btn-sm" onclick="add_modal.close()">DESCARTAR</button>
+        <button type="submit" class="btn btn-success text-white btn-sm px-10">GUARDAR REGISTRO</button>
+      </div>
+    </form>
+  </div>
+  <form method="dialog" class="modal-backdrop backdrop-blur-md">
+    <button>close</button>
+  </form>
+</dialog>
+
+<style>
+  /* Para que no se vea tan apretado, un poco de margen a los inputs */
+  input {
+    margin-top: 2px;
+  }
+</style>
