@@ -28,77 +28,75 @@
         
         <div class="flex flex-col gap-3">
           <h4 class="font-bold text-primary border-b border-primary/40 text-xs">I. IDENTIDAD Y GRADO</h4>
-          <input type="file" class="file-input file-input-bordered file-input-xs w-full" accept="image/*" />
-          <input type="text" placeholder="SUB UNIDAD / SITUACIÓN" class="input input-bordered input-xs w-full" />
-          <input type="text" placeholder="SEDE DEPINCRI" class="input input-bordered input-xs w-full" />
-          <input type="text" placeholder="AREA Y/U OFICINA" class="input input-bordered input-xs w-full" />
-          <input type="text" placeholder="GRADO" class="input input-bordered input-xs w-full" />
-          <input type="text" placeholder="APELLIDOS Y NOMBRES" class="input input-bordered input-xs w-full font-bold" />
-          <input type="text" placeholder="SEXO" class="input input-bordered input-xs w-full font-bold" />
+          <input type="file" name="foto" class="file-input file-input-bordered file-input-xs w-full" accept="image/*" />
+          <input type="text" name="sub_unidad_situacion" placeholder="SUB UNIDAD / SITUACIÓN" class="input input-bordered input-xs w-full" />
+          <input type="text" name="sede_depincri" placeholder="SEDE DEPINCRI" class="input input-bordered input-xs w-full" />
+          <input type="text" name="area_oficina" placeholder="AREA Y/U OFICINA" class="input input-bordered input-xs w-full" />
+          <input type="text" name="grado" placeholder="GRADO" class="input input-bordered input-xs w-full" />
+          <input type="text" name="apellidos_nombres" placeholder="APELLIDOS Y NOMBRES" class="input input-bordered input-xs w-full font-bold" />
+          <input type="text" name="sexo" placeholder="SEXO" class="input input-bordered input-xs w-full font-bold" />
           
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
             <p class="text-[9px] font-black opacity-60 mb-2 uppercase">NATURALEZA</p>
             <div class="flex flex-col gap-1">
-                <input type="text" placeholder="Distrito" class="input input-bordered input-xs" />
-                <input type="text" placeholder="Provincia" class="input input-bordered input-xs" />
-                <input type="text" placeholder="Depto." class="input input-bordered input-xs" />
+                <input type="text" name="distrito_nac" placeholder="Distrito" class="input input-bordered input-xs" />
+                <input type="text" name="provincia_nac" placeholder="Provincia" class="input input-bordered input-xs" />
+                <input type="text" name="depto_nac" placeholder="Depto." class="input input-bordered input-xs" />
             </div>
           </div>
           <div class="flex gap-2">
-            <input type="date" class="input input-bordered input-xs flex-1" title="Fecha Nac." />
-            <input type="number" placeholder="EDAD" class="input input-bordered input-xs w-20" />
+            <input type="date" name="fecha_nac" class="input input-bordered input-xs flex-1" title="Fecha Nac." />
+            <input type="number" name="edad" placeholder="EDAD" class="input input-bordered input-xs w-20" />
           </div>
         </div>
 
         <div class="flex flex-col gap-3 bg-base-300/10 p-2 rounded-xl border border-white/5 h-fit lg:col-span-2">
           <h4 class="font-bold text-primary border-b border-primary/40 text-xs">II. INFORMACIÓN PNP</h4>
           <div class="flex gap-1">
-            <input type="text" placeholder="DNI" class="input input-bordered input-xs w-1/2" maxlength="8" />
-            <input type="text" placeholder="COD DNI" class="input input-bordered input-xs w-1/2" />
+            <input type="text" name="dni" placeholder="DNI" class="input input-bordered input-xs w-1/2" maxlength="8" />
+            <input type="text" name="codigo_dni" placeholder="COD DNI" class="input input-bordered input-xs w-1/2" />
           </div>
           <div class="grid grid-cols-2 gap-2">
-            <input type="date" class="input input-bordered input-xs" title="Ingreso PNP" />
-            <input type="date" class="input input-bordered input-xs" title="Egreso PNP" />
+            <input type="date" name="ingreso_pnp" class="input input-bordered input-xs" title="Ingreso PNP" />
+            <input type="date" name="egreso_pnp" class="input input-bordered input-xs" title="Egreso PNP" />
           </div>
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
             <p class="text-[9px] font-black opacity-60 mb-2">TIEMPO SERVICIO (Reales y Efectivos)</p>
             <div class="grid grid-cols-3 gap-1">
-                <input type="text" placeholder="AÑOS" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MES" class="input input-bordered input-xs" />
-                <input type="text" placeholder="DIAS" class="input input-bordered input-xs" />
+                <input type="text" name="tiempo_servicio_anios" placeholder="AÑOS" class="input input-bordered input-xs" />
+                <input type="text" name="tiempo_servicio_meses" placeholder="MES" class="input input-bordered input-xs" />
+                <input type="text" name="tiempo_servicio_dias" placeholder="DIAS" class="input input-bordered input-xs" />
             </div>
           </div>
-          <input type="text" placeholder="CODIGO y/o ESPECIALIDAD" class="input input-bordered input-xs" />
+          <input type="text" name="codigo_especialidad" placeholder="CODIGO y/o ESPECIALIDAD" class="input input-bordered input-xs" />
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
             <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CARNET DE IDENTIDAD PERSONAL (CIP)</p>
             <div class="grid grid-cols-2 gap-1 mb-2">
-              <input type="text" placeholder="ANTIGUO y/o CODOFÍN" class="input input-bordered input-xs mb-1" />
-              <input type="text" placeholder="N° CIP" class="input input-bordered input-xs mb-1" />
-              <input type="text" placeholder="SIT CIP" class="input input-bordered input-xs mb-1" />
-              <input type="date" class="input input-bordered input-xs" title="FECHA (Expedición y/o Pérdida)" />
+              <input type="text" name="cip_antiguo_codofin" placeholder="ANTIGUO y/o CODOFÍN" class="input input-bordered input-xs mb-1" />
+              <input type="text" name="cip_numero" placeholder="N° CIP" class="input input-bordered input-xs mb-1" />
+              <input type="text" name="cip_situacion" placeholder="SIT CIP" class="input input-bordered input-xs mb-1" />
+              <input type="date" name="cip_fecha_expedicion" class="input input-bordered input-xs" title="FECHA (Expedición y/o Pérdida)" />
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-2">
-            <input type="text" placeholder="ULTIMO ASCENSO" class="input input-bordered input-xs" />
-            <input type="text" placeholder="GRUPO SANG." class="input input-bordered input-xs" />
-            <input type="text" placeholder="INCORP. DIVPOL-CHYO" class="input input-bordered input-xs" />
-            <input type="text" placeholder="INCORP. DEPINCRI" class="input input-bordered input-xs" />
-            <input type="text" placeholder="CARGO" class="input input-bordered input-xs" />
-            <input type="text" placeholder="COD. CARGO" class="input input-bordered input-xs" />
-            <input type="text" placeholder="FUNCION Y HORARIO" class="input input-bordered input-xs" />
-            <select class="select select-bordered select-xs w-full min-h-6">
-                <option disabled selected>APTITUD PSICOSOM.</option>
-                <option>APTO</option>
-                <option>NO APTO</option>
-                <option>RESTRINGIDO</option>
+            <input type="text" name="ultimo_ascenso" placeholder="ULTIMO ASCENSO" class="input input-bordered input-xs" />
+            <input type="text" name="grupo_sanguineo" placeholder="GRUPO SANG." class="input input-bordered input-xs" />
+            <input type="text" name="incorp_divpol_chyo" placeholder="INCORP. DIVPOL-CHYO" class="input input-bordered input-xs" />
+            <input type="text" name="incorp_depincri" placeholder="INCORP. DEPINCRI" class="input input-bordered input-xs" />
+            <input type="text" name="cargo" placeholder="CARGO" class="input input-bordered input-xs" />
+            <input type="text" name="codigo_cargo" placeholder="COD. CARGO" class="input input-bordered input-xs" />
+            <input type="text" name="funcion_horario" placeholder="FUNCION Y HORARIO" class="input input-bordered input-xs" />
+            <select name="aptitud_psicosomatica" class="select select-bordered select-xs w-full min-h-6">
+                <option disabled selected value="">APTITUD PSICOSOM.</option>
+                <option value="APTO">APTO</option>
+                <option value="NO APTO">NO APTO</option>
+                <option value="RESTRINGIDO">RESTRINGIDO</option>
             </select>
-            <input type="text" placeholder="PROCEDENCIA" class="input input-bordered input-xs" />
-            <input type="text" placeholder="SE INCORPORA AL DEPINCRI EN CALIDAD DE" class="input input-bordered input-xs" />
+            <input type="text" name="procedencia" placeholder="PROCEDENCIA" class="input input-bordered input-xs" />
+            <input type="text" name="calidad_incorporacion" placeholder="SE INCORPORA AL DEPINCRI EN CALIDAD DE" class="input input-bordered input-xs" />
           </div>
         </div>
-
-        <!--TODO:Revisar y Comparar los campos con el excel -->
 
         <div class="flex flex-col gap-3">
           <h4 class="font-bold text-primary border-b border-primary/40 text-xs">III. ARMAMENTO PARTICULAR Y ESTADO</h4>
@@ -106,29 +104,29 @@
             <div class="p-2 rounded-lg border border-warning/20 bg-warning/5">
               <p class="text-[9px] font-black text-warning mb-2 uppercase">PARTICULAR</p>
               <div class="grid grid-cols-2 gap-1 mb-2">
-                <input type="text" placeholder="TIPO" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MARCA" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MODELO" class="input input-bordered input-xs" />
-                <input type="text" placeholder="CALIBRE" class="input input-bordered input-xs" />
+                <input type="text" name="arma_part_tipo" placeholder="TIPO" class="input input-bordered input-xs" />
+                <input type="text" name="arma_part_marca" placeholder="MARCA" class="input input-bordered input-xs" />
+                <input type="text" name="arma_part_modelo" placeholder="MODELO" class="input input-bordered input-xs" />
+                <input type="text" name="arma_part_calibre" placeholder="CALIBRE" class="input input-bordered input-xs" />
               </div>
-              <input type="text" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />              
+              <input type="text" name="arma_part_serie" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />              
 
               <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
                 <p class="text-[9px] font-black text-warning mb-2 uppercase">CERTIFICADO DE ARMA DE FUEGO (CAF)</p>
-                <input type="text" placeholder="N° CAF" class="input input-bordered input-xs my-2" />
+                <input type="text" name="arma_part_caf_num" placeholder="N° CAF" class="input input-bordered input-xs my-2" />
                 <p class="text-[9px] font-black opacity-60 mb-2 uppercase">FECHA</p>
 
                 <div class="grid grid-cols-2 gap-1 mb-2">
-                  <input type="date" class="input input-bordered input-xs" title="Expedic." />
-                  <input type="date" class="input input-bordered input-xs" title="Caduca" />
-                  <input type="text" placeholder="LIBRO" class="input input-bordered input-xs" />                
-                  <input type="text" placeholder="FOLIO" class="input input-bordered input-xs" />
+                  <input type="date" name="arma_part_caf_exped" class="input input-bordered input-xs" title="Expedic." />
+                  <input type="date" name="arma_part_caf_caduca" class="input input-bordered input-xs" title="Caduca" />
+                  <input type="text" name="arma_part_caf_libro" placeholder="LIBRO" class="input input-bordered input-xs" />                
+                  <input type="text" name="arma_part_caf_folio" placeholder="FOLIO" class="input input-bordered input-xs" />
                 </div>
               
                 <p class="text-[9px] font-black opacity-60 mb-2 uppercase">TARJETA PROPIEDAD ARMA DE FUEGO</p>
                 <div class="grid grid-cols-2 gap-1 mb-2">
-                  <input type="text" placeholder="N° TARJETA" class="input input-bordered input-xs" />
-                  <input type="date" class="input input-bordered input-xs" title="Fecha Emisión" />
+                  <input type="text" name="arma_part_tarjeta_num" placeholder="N° TARJETA" class="input input-bordered input-xs" />
+                  <input type="date" name="arma_part_tarjeta_emision" class="input input-bordered input-xs" title="Fecha Emisión" />
                 </div>
               </div>
               
@@ -136,28 +134,28 @@
             <div class="p-2 rounded-lg border border-info/20 bg-info/5">
               <p class="text-[9px] font-black text-info mb-2 uppercase">ESTADO</p>
               <div class="grid grid-cols-2 gap-1 mb-2">
-                <input type="text" placeholder="TIPO" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MARCA" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MODELO" class="input input-bordered input-xs" />
-                <input type="text" placeholder="CALIBRE" class="input input-bordered input-xs" />
+                <input type="text" name="arma_est_tipo" placeholder="TIPO" class="input input-bordered input-xs" />
+                <input type="text" name="arma_est_marca" placeholder="MARCA" class="input input-bordered input-xs" />
+                <input type="text" name="arma_est_modelo" placeholder="MODELO" class="input input-bordered input-xs" />
+                <input type="text" name="arma_est_calibre" placeholder="CALIBRE" class="input input-bordered input-xs" />
               </div>
-              <input type="text" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />
+              <input type="text" name="arma_est_serie" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />
                 <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
                   <p class="text-[9px] font-black text-info mb-2 uppercase">CERTIFICADO DE ARMA DE FUEGO (CAF)</p>
-                  <input type="text" placeholder="N° CAF" class="input input-bordered input-xs my-2" />
+                  <input type="text" name="arma_est_caf_num" placeholder="N° CAF" class="input input-bordered input-xs my-2" />
                   <p class="text-[9px] font-black opacity-60 mb-2 uppercase">FECHA</p>
 
                   <div class="grid grid-cols-2 gap-1 mb-2">
-                    <input type="date" class="input input-bordered input-xs" title="Expedic." />
-                    <input type="date" class="input input-bordered input-xs" title="Caduca" />
-                    <input type="text" placeholder="LIBRO" class="input input-bordered input-xs" />                
-                    <input type="text" placeholder="FOLIO" class="input input-bordered input-xs" />
+                    <input type="date" name="arma_est_caf_exped" class="input input-bordered input-xs" title="Expedic." />
+                    <input type="date" name="arma_est_caf_caduca" class="input input-bordered input-xs" title="Caduca" />
+                    <input type="text" name="arma_est_caf_libro" placeholder="LIBRO" class="input input-bordered input-xs" />                
+                    <input type="text" name="arma_est_caf_folio" placeholder="FOLIO" class="input input-bordered input-xs" />
                   </div>
                 
                   <p class="text-[9px] font-black opacity-60 mb-2 uppercase">TARJETA PROPIEDAD ARMA DE FUEGO</p>
                   <div class="grid grid-cols-2 gap-1 mb-2">
-                    <input type="text" placeholder="N° TARJETA" class="input input-bordered input-xs" />
-                    <input type="date" class="input input-bordered input-xs" title="Fecha Emisión" />
+                    <input type="text" name="arma_est_tarjeta_num" placeholder="N° TARJETA" class="input input-bordered input-xs" />
+                    <input type="date" name="arma_est_tarjeta_emision" class="input input-bordered input-xs" title="Fecha Emisión" />
                   </div>
                 </div>
             </div>
@@ -170,50 +168,50 @@
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
             <p class="text-[9px] font-black opacity-60 mb-2 uppercase">VEHICULO MAYOR (CAMIONETA Y/O AUTO)</p>
             <div class="grid grid-cols-3 gap-1 mb-2">
-                <input type="text" placeholder="PARTICULAR" class="input input-bordered input-xs" />
-                <input type="text" placeholder="POLICIAL" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MILITAR" class="input input-bordered input-xs" />
+                <input type="text" name="lic_mayor_particular" placeholder="PARTICULAR" class="input input-bordered input-xs" />
+                <input type="text" name="lic_mayor_policial" placeholder="POLICIAL" class="input input-bordered input-xs" />
+                <input type="text" name="lic_mayor_militar" placeholder="MILITAR" class="input input-bordered input-xs" />
             </div>
             <div class="grid grid-cols-2 gap-1">
-                <input type="text" placeholder="CLASE" class="input input-bordered input-xs" />
-                <input type="text" placeholder="CATEGORIA" class="input input-bordered input-xs" />
-                <input type="date" title="F.EXPED" class="input input-bordered input-xs" />
-                <input type="date" title="F.CADUC" class="input input-bordered input-xs" />
+                <input type="text" name="lic_mayor_clase" placeholder="CLASE" class="input input-bordered input-xs" />
+                <input type="text" name="lic_mayor_categoria" placeholder="CATEGORIA" class="input input-bordered input-xs" />
+                <input type="date" name="lic_mayor_f_exped" title="F.EXPED" class="input input-bordered input-xs" />
+                <input type="date" name="lic_mayor_f_caduc" title="F.CADUC" class="input input-bordered input-xs" />
             </div>
           </div>
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
             <p class="text-[9px] font-black opacity-60 mb-2 uppercase">VEHICULO MENOR (MOTOCICLETA)</p>
             <div class="grid grid-cols-3 gap-1 mb-2">
-                <input type="text" placeholder="PARTICULAR" class="input input-bordered input-xs" />
-                <input type="text" placeholder="POLICIAL" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MILITAR" class="input input-bordered input-xs" />
+                <input type="text" name="lic_menor_particular" placeholder="PARTICULAR" class="input input-bordered input-xs" />
+                <input type="text" name="lic_menor_policial" placeholder="POLICIAL" class="input input-bordered input-xs" />
+                <input type="text" name="lic_menor_militar" placeholder="MILITAR" class="input input-bordered input-xs" />
             </div>
             <div class="grid grid-cols-2 gap-1">
-                <input type="text" placeholder="CLASE" class="input input-bordered input-xs" />
-                <input type="text" placeholder="CATEGORIA" class="input input-bordered input-xs" />
-                <input type="date" title="F.EXPED" class="input input-bordered input-xs" />
-                <input type="date" title="F.CADUC" class="input input-bordered input-xs" />
+                <input type="text" name="lic_menor_clase" placeholder="CLASE" class="input input-bordered input-xs" />
+                <input type="text" name="lic_menor_categoria" placeholder="CATEGORIA" class="input input-bordered input-xs" />
+                <input type="date" name="lic_menor_f_exped" title="F.EXPED" class="input input-bordered input-xs" />
+                <input type="date" name="lic_menor_f_caduc" title="F.CADUC" class="input input-bordered input-xs" />
             </div>
           </div>
         </div>
 
         <div class="flex flex-col gap-3">
           <h4 class="font-bold text-primary border-b border-primary/40 text-xs">V. DOMICILIO Y ECONOMÍA</h4>
-          <input type="text" placeholder="ESTADO CIVIL (EC)" class="input input-bordered input-xs" />
+          <input type="text" name="estado_civil" placeholder="ESTADO CIVIL (EC)" class="input input-bordered input-xs" />
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
             <p class="text-[9px] font-black opacity-60 mb-2 uppercase">DOMICILIO</p>
-            <input type="text" placeholder="DIRECCIÓN" class="input input-bordered input-xs mb-1" />
-            <input type="text" placeholder="REFERENCIA DOMICILIARIA" class="input input-bordered input-xs mb-1" />
+            <input type="text" name="direccion" placeholder="DIRECCIÓN" class="input input-bordered input-xs mb-1" />
+            <input type="text" name="referencia_domiciliaria" placeholder="REFERENCIA DOMICILIARIA" class="input input-bordered input-xs mb-1" />
             <div class="grid grid-cols-3 gap-1">
-                <input type="text" placeholder="Distrito" class="input input-bordered input-xs" />
-                <input type="text" placeholder="Provincia" class="input input-bordered input-xs" />
-                <input type="text" placeholder="Departamento" class="input input-bordered input-xs" />
+                <input type="text" name="distrito_dom" placeholder="Distrito" class="input input-bordered input-xs" />
+                <input type="text" name="provincia_dom" placeholder="Provincia" class="input input-bordered input-xs" />
+                <input type="text" name="depto_dom" placeholder="Departamento" class="input input-bordered input-xs" />
             </div>
           </div>
           <div class="p-2 rounded-lg border border-success/30 bg-success/5">
             <p class="text-[9px] font-black text-success mb-2 uppercase">BANCO DE LA NACIÓN</p>
-            <input type="text" placeholder="N° CUENTA" class="input input-bordered input-xs mb-1" />
-            <input type="text" placeholder="C.C.I" class="input input-bordered input-xs" />
+            <input type="text" name="bn_cuenta_corriente" placeholder="N° CUENTA" class="input input-bordered input-xs mb-1" />
+            <input type="text" name="bn_cci" placeholder="C.C.I" class="input input-bordered input-xs" />
           </div>
         </div>
 
@@ -223,30 +221,30 @@
              <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
                 <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CORREO (PARTICULAR)</p>
                 <div class="grid grid-cols-2 gap-1 mb-1">
-                    <input type="email" placeholder="Gmail" class="input input-bordered input-xs" />
-                    <input type="email" placeholder="Hotmail" class="input input-bordered input-xs" />
+                    <input type="email" name="email_gmail" placeholder="GMAIL" class="input input-bordered input-xs" />
+                    <input type="email" name="email_hotmail" placeholder="HOTMAIL" class="input input-bordered input-xs" />
                 </div>
-                <input type="email" placeholder="INSTITUCIONAL" class="input input-bordered input-xs" />
+                <input type="email" name="email_institucional" placeholder="INSTITUCIONAL" class="input input-bordered input-xs" />
              </div>
              <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
                 <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CELULAR</p>
                 <div class="grid grid-cols-5 gap-1">
-                    <input type="text" placeholder="RPC" class="input input-bordered input-xs" />
-                    <input type="text" placeholder="RPM" class="input input-bordered input-xs" />
-                    <input type="text" placeholder="ENTEL" class="input input-bordered input-xs" />
-                    <input type="text" placeholder="BITEL" class="input input-bordered input-xs" />
-                    <input type="text" placeholder="WSP" class="input input-bordered input-xs" />
-                    <input type="text" placeholder="CASA" class="input input-bordered input-xs col-span-5" />
+                    <input type="text" name="telf_rpc" placeholder="RPC" class="input input-bordered input-xs" />
+                    <input type="text" name="telf_rpm" placeholder="RPM" class="input input-bordered input-xs" />
+                    <input type="text" name="telf_entel" placeholder="ENTEL" class="input input-bordered input-xs" />
+                    <input type="text" name="telf_bitel" placeholder="BITEL" class="input input-bordered input-xs" />
+                    <input type="text" name="telf_wsp" placeholder="WSP" class="input input-bordered input-xs" />
+                    <input type="text" name="telf_casa" placeholder="CASA" class="input input-bordered input-xs col-span-5" />
                 </div>
              </div>
           </div>
           <div class="p-2 rounded-lg border border-error/30 bg-error/5 mt-2">
             <p class="text-[9px] font-black text-error mb-2 uppercase">REASIGNADO / CAMBIADO</p>
             <div class="grid grid-cols-4 gap-1">
-                <input type="text" placeholder="TIPO DOC" class="input input-bordered input-xs" />
-                <input type="text" placeholder="N°" class="input input-bordered input-xs" />
-                <input type="text" placeholder="PROCEDENCIA" class="input input-bordered input-xs" />
-                <input type="date" title="FECHA" class="input input-bordered input-xs" />
+                <input type="text" name="reasig_tipo_doc" placeholder="TIPO DOC" class="input input-bordered input-xs" />
+                <input type="text" name="reasig_num" placeholder="N°" class="input input-bordered input-xs" />
+                <input type="text" name="reasig_procedencia" placeholder="PROCEDENCIA" class="input input-bordered input-xs" />
+                <input type="date" name="reasig_fecha" title="FECHA" class="input input-bordered input-xs" />
             </div>
           </div>
         </div>
@@ -265,7 +263,6 @@
 </dialog>
 
 <style>
-  /* Para que no se vea tan apretado, un poco de margen a los inputs */
   input {
     margin-top: 2px;
   }
