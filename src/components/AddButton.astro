@@ -50,7 +50,7 @@
           </div>
         </div>
 
-        <div class="lg:col-span-2 flex flex-col gap-3 bg-base-300/10 p-2 rounded-xl border border-white/5">
+        <div class="flex flex-col gap-3 bg-base-300/10 p-2 rounded-xl border border-white/5 h-fit lg:col-span-2">
           <h4 class="font-bold text-primary border-b border-primary/40 text-xs">II. INFORMACIÓN PNP</h4>
           <div class="flex gap-1">
             <input type="text" placeholder="DNI" class="input input-bordered input-xs w-1/2" maxlength="8" />
@@ -101,7 +101,7 @@
         <!--TODO:Revisar y Comparar los campos con el excel -->
 
         <div class="flex flex-col gap-3">
-          <h4 class="font-bold text-primary border-b border-primary/40 text-xs text-center">III. ARMAMENTO PARTICULAR Y ESTADO</h4>
+          <h4 class="font-bold text-primary border-b border-primary/40 text-xs">III. ARMAMENTO PARTICULAR Y ESTADO</h4>
           <div class="grid grid-cols-1 gap-4">
             <div class="p-2 rounded-lg border border-warning/20 bg-warning/5">
               <p class="text-[9px] font-black text-warning mb-2 uppercase">PARTICULAR</p>
@@ -111,17 +111,27 @@
                 <input type="text" placeholder="MODELO" class="input input-bordered input-xs" />
                 <input type="text" placeholder="CALIBRE" class="input input-bordered input-xs" />
               </div>
-              <input type="text" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />
-              <div class="grid grid-cols-2 gap-1">
-                <input type="text" placeholder="N° CAF" class="input input-bordered input-xs" />
-                <input type="text" placeholder="LIBRO/FOLIO" class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" title="Expedic." />
-                <input type="date" class="input input-bordered input-xs" title="Caduca" />
+              <input type="text" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />              
+
+              <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+                <p class="text-[9px] font-black text-warning mb-2 uppercase">CERTIFICADO DE ARMA DE FUEGO (CAF)</p>
+                <input type="text" placeholder="N° CAF" class="input input-bordered input-xs my-2" />
+                <p class="text-[9px] font-black opacity-60 mb-2 uppercase">FECHA</p>
+
+                <div class="grid grid-cols-2 gap-1 mb-2">
+                  <input type="date" class="input input-bordered input-xs" title="Expedic." />
+                  <input type="date" class="input input-bordered input-xs" title="Caduca" />
+                  <input type="text" placeholder="LIBRO" class="input input-bordered input-xs" />                
+                  <input type="text" placeholder="FOLIO" class="input input-bordered input-xs" />
+                </div>
+              
+                <p class="text-[9px] font-black opacity-60 mb-2 uppercase">TARJETA PROPIEDAD ARMA DE FUEGO</p>
+                <div class="grid grid-cols-2 gap-1 mb-2">
+                  <input type="text" placeholder="N° TARJETA" class="input input-bordered input-xs" />
+                  <input type="date" class="input input-bordered input-xs" title="Fecha Emisión" />
+                </div>
               </div>
-              <div class="grid grid-cols-2 gap-1 mt-2">
-                <input type="text" placeholder="N° TARJETA" class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" title="Emisión" />
-              </div>
+              
             </div>
             <div class="p-2 rounded-lg border border-info/20 bg-info/5">
               <p class="text-[9px] font-black text-info mb-2 uppercase">ESTADO</p>
@@ -132,16 +142,24 @@
                 <input type="text" placeholder="CALIBRE" class="input input-bordered input-xs" />
               </div>
               <input type="text" placeholder="N° SERIE" class="input input-bordered input-xs mb-2" />
-              <div class="grid grid-cols-2 gap-1">
-                <input type="text" placeholder="N° CAF" class="input input-bordered input-xs" />
-                <input type="text" placeholder="LIBRO/FOLIO" class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" title="Expedic." />
-                <input type="date" class="input input-bordered input-xs" title="Caduca" />
-              </div>
-              <div class="grid grid-cols-2 gap-1 mt-2">
-                <input type="text" placeholder="N° TARJETA" class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" title="Emisión" />
-              </div>
+                <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
+                  <p class="text-[9px] font-black text-info mb-2 uppercase">CERTIFICADO DE ARMA DE FUEGO (CAF)</p>
+                  <input type="text" placeholder="N° CAF" class="input input-bordered input-xs my-2" />
+                  <p class="text-[9px] font-black opacity-60 mb-2 uppercase">FECHA</p>
+
+                  <div class="grid grid-cols-2 gap-1 mb-2">
+                    <input type="date" class="input input-bordered input-xs" title="Expedic." />
+                    <input type="date" class="input input-bordered input-xs" title="Caduca" />
+                    <input type="text" placeholder="LIBRO" class="input input-bordered input-xs" />                
+                    <input type="text" placeholder="FOLIO" class="input input-bordered input-xs" />
+                  </div>
+                
+                  <p class="text-[9px] font-black opacity-60 mb-2 uppercase">TARJETA PROPIEDAD ARMA DE FUEGO</p>
+                  <div class="grid grid-cols-2 gap-1 mb-2">
+                    <input type="text" placeholder="N° TARJETA" class="input input-bordered input-xs" />
+                    <input type="date" class="input input-bordered input-xs" title="Fecha Emisión" />
+                  </div>
+                </div>
             </div>
           </div>
           
@@ -150,31 +168,31 @@
         <div class="flex flex-col gap-3">
           <h4 class="font-bold text-primary border-b border-primary/40 text-xs">IV. LICENCIAS DE CONDUCIR</h4>
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
-            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">MAYOR (A)</p>
+            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">VEHICULO MAYOR (CAMIONETA Y/O AUTO)</p>
             <div class="grid grid-cols-3 gap-1 mb-2">
-                <input type="text" placeholder="PAR" class="input input-bordered input-xs" />
-                <input type="text" placeholder="POL" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MIL" class="input input-bordered input-xs" />
+                <input type="text" placeholder="PARTICULAR" class="input input-bordered input-xs" />
+                <input type="text" placeholder="POLICIAL" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MILITAR" class="input input-bordered input-xs" />
             </div>
             <div class="grid grid-cols-2 gap-1">
                 <input type="text" placeholder="CLASE" class="input input-bordered input-xs" />
-                <input type="text" placeholder="CAT" class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" />
+                <input type="text" placeholder="CATEGORIA" class="input input-bordered input-xs" />
+                <input type="date" title="F.EXPED" class="input input-bordered input-xs" />
+                <input type="date" title="F.CADUC" class="input input-bordered input-xs" />
             </div>
           </div>
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
-            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">MENOR (B)</p>
+            <p class="text-[9px] font-black opacity-60 mb-2 uppercase">VEHICULO MENOR (MOTOCICLETA)</p>
             <div class="grid grid-cols-3 gap-1 mb-2">
-                <input type="text" placeholder="PAR" class="input input-bordered input-xs" />
-                <input type="text" placeholder="POL" class="input input-bordered input-xs" />
-                <input type="text" placeholder="MIL" class="input input-bordered input-xs" />
+                <input type="text" placeholder="PARTICULAR" class="input input-bordered input-xs" />
+                <input type="text" placeholder="POLICIAL" class="input input-bordered input-xs" />
+                <input type="text" placeholder="MILITAR" class="input input-bordered input-xs" />
             </div>
             <div class="grid grid-cols-2 gap-1">
                 <input type="text" placeholder="CLASE" class="input input-bordered input-xs" />
-                <input type="text" placeholder="CAT" class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" />
+                <input type="text" placeholder="CATEGORIA" class="input input-bordered input-xs" />
+                <input type="date" title="F.EXPED" class="input input-bordered input-xs" />
+                <input type="date" title="F.CADUC" class="input input-bordered input-xs" />
             </div>
           </div>
         </div>
@@ -185,11 +203,11 @@
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
             <p class="text-[9px] font-black opacity-60 mb-2 uppercase">DOMICILIO</p>
             <input type="text" placeholder="DIRECCIÓN" class="input input-bordered input-xs mb-1" />
-            <input type="text" placeholder="REFERENCIA" class="input input-bordered input-xs mb-1" />
+            <input type="text" placeholder="REFERENCIA DOMICILIARIA" class="input input-bordered input-xs mb-1" />
             <div class="grid grid-cols-3 gap-1">
-                <input type="text" placeholder="Dist." class="input input-bordered input-xs" />
-                <input type="text" placeholder="Prov." class="input input-bordered input-xs" />
-                <input type="text" placeholder="Dep." class="input input-bordered input-xs" />
+                <input type="text" placeholder="Distrito" class="input input-bordered input-xs" />
+                <input type="text" placeholder="Provincia" class="input input-bordered input-xs" />
+                <input type="text" placeholder="Departamento" class="input input-bordered input-xs" />
             </div>
           </div>
           <div class="p-2 rounded-lg border border-success/30 bg-success/5">
@@ -203,7 +221,7 @@
           <h4 class="font-bold text-primary border-b border-primary/40 text-xs">VI. COMUNICACIONES Y REASIGNACIÓN</h4>
           <div class="grid grid-cols-2 gap-4">
              <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
-                <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CORREO</p>
+                <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CORREO (PARTICULAR)</p>
                 <div class="grid grid-cols-2 gap-1 mb-1">
                     <input type="email" placeholder="Gmail" class="input input-bordered input-xs" />
                     <input type="email" placeholder="Hotmail" class="input input-bordered input-xs" />
@@ -214,10 +232,11 @@
                 <p class="text-[9px] font-black opacity-60 mb-2 uppercase">CELULAR</p>
                 <div class="grid grid-cols-5 gap-1">
                     <input type="text" placeholder="RPC" class="input input-bordered input-xs" />
-                    <input type="text" placeholder="MOV" class="input input-bordered input-xs" />
-                    <input type="text" placeholder="ENT" class="input input-bordered input-xs" />
-                    <input type="text" placeholder="BIT" class="input input-bordered input-xs" />
+                    <input type="text" placeholder="RPM" class="input input-bordered input-xs" />
+                    <input type="text" placeholder="ENTEL" class="input input-bordered input-xs" />
+                    <input type="text" placeholder="BITEL" class="input input-bordered input-xs" />
                     <input type="text" placeholder="WSP" class="input input-bordered input-xs" />
+                    <input type="text" placeholder="CASA" class="input input-bordered input-xs col-span-5" />
                 </div>
              </div>
           </div>
@@ -226,15 +245,15 @@
             <div class="grid grid-cols-4 gap-1">
                 <input type="text" placeholder="TIPO DOC" class="input input-bordered input-xs" />
                 <input type="text" placeholder="N°" class="input input-bordered input-xs" />
-                <input type="text" placeholder="PROCED." class="input input-bordered input-xs" />
-                <input type="date" class="input input-bordered input-xs" />
+                <input type="text" placeholder="PROCEDENCIA" class="input input-bordered input-xs" />
+                <input type="date" title="FECHA" class="input input-bordered input-xs" />
             </div>
           </div>
         </div>
 
       </div>
 
-      <div class="modal-action sticky bottom-0 bg-base-200 py-4 border-t border-white/10 mt-6 flex justify-between z-20">
+      <div class="modal-action sticky bottom-0 bg-base-200 py-4 border-t border-white/10 mt-6 flex  z-20">
         <button type="button" class="btn btn-error btn-outline btn-sm" onclick="add_modal.close()">DESCARTAR</button>
         <button type="submit" class="btn btn-success text-white btn-sm px-10">GUARDAR REGISTRO</button>
       </div>
