@@ -13,7 +13,7 @@ const User = defineTable({
 // TABLA 1: Identidad (El Corazón)
 const Personal = defineTable({
   columns: {
-    id: column.number({ primaryKey: true }),
+    id: column.number({ primaryKey: true, autoIncrement: true }),
     foto: column.text(),
     grado: column.text(),
     apellidos_nombres: column.text(),
