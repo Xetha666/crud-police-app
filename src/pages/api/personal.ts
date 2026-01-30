@@ -1,33 +1,52 @@
 import { personalSchema } from '@/lib/schemas/personal';
 import type { APIRoute } from 'astro';
 import { Armamento, db, InfoPNP, Personal, VidaSocial } from 'astro:db';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const formData = await request.formData();
-    const data = Object.fromEntries(formData);
+    const fotoFile = formData.get('foto') as File | null;
+    let fotoPath = "--";
 
-    // 1. Validar con Zod (Asegura que los vacíos sean "--")
-    const validatedData = personalSchema.parse(data);
+    // 1. Procesamiento físico de la imagen
+    if (fotoFile && fotoFile.size > 0 && fotoFile.name !== "undefined") {
+      const fileName = `${Date.now()}-${fotoFile.name.replace(/\s+/g, '_')}`;
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+      
+      // Crear carpeta si no existe
+      await fs.mkdir(uploadDir, { recursive: true });
+      
+      const filePath = path.join(uploadDir, fileName);
+      const arrayBuffer = await fotoFile.arrayBuffer();
+      await fs.writeFile(filePath, Buffer.from(arrayBuffer));
+      
+      fotoPath = `/uploads/${fileName}`;
+    }
 
-    // 2. INSERTAR EN TABLA: PERSONAL (Retorna el ID)
+    const rawData = Object.fromEntries(formData);
+    const dataToValidate = {
+      ...rawData,
+      foto: fotoFile // Pasamos el archivo real para que Zod valide la extensión
+    };
+
+    // 3. Validar con el Schema de Zod
+    const validatedData = personalSchema.parse(dataToValidate);
+
+    // 4. EXTRAER LOS DATOS Y LIMPIAR LA FOTO
+    // Sacamos 'foto' de validatedData para que no nos moleste
+    const { foto: _, ...personalDataWithoutFoto } = validatedData;
+
+    // 5. INSERTAR EN TABLA: PERSONAL
     const [newPersonal] = await db.insert(Personal).values({
-      foto: "--", // Manejaremos la subida de imagen en el siguiente paso
-      grado: validatedData.grado,
-      apellidos_nombres: validatedData.apellidos_nombres,
-      sexo: validatedData.sexo,
-      dni: validatedData.dni,
-      codigo_dni: validatedData.codigo_dni,
-      fecha_nac: validatedData.fecha_nac,
-      edad: validatedData.edad,
-      distrito_nac: validatedData.distrito_nac,
-      provincia_nac: validatedData.provincia_nac,
-      depto_nac: validatedData.depto_nac,
+      ...personalDataWithoutFoto, 
+      foto: fotoPath,             
     }).returning();
 
     const p_id = newPersonal.id;
 
-    // 3. INSERTAR EN TABLA: INFOPNP
+    // 6. INSERTAR EN TABLA: INFOPNP
     await db.insert(InfoPNP).values({
       personal_id: p_id,
       sub_unidad_situacion: validatedData.sub_unidad_situacion,
@@ -55,7 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
       calidad_incorporacion: validatedData.calidad_incorporacion,
     });
 
-    // 4. INSERTAR EN TABLA: VIDASOCIAL (Licencias, Domicilio, Comunicación)
+    // 7. INSERTAR EN TABLA: VIDASOCIAL (Licencias, Domicilio, Comunicación)
     await db.insert(VidaSocial).values({
       personal_id: p_id,
       // Licencias Mayor
@@ -100,7 +119,7 @@ export const POST: APIRoute = async ({ request }) => {
       reasig_fecha: validatedData.reasig_fecha,
     });
 
-    // 5. INSERTAR EN TABLA: ARMAMENTO (Lógica 1:N)
+    // 8. INSERTAR EN TABLA: ARMAMENTO (Lógica 1:N)
     // Registro de Arma Particular (solo si hay serie)
     if (validatedData.arma_part_serie !== "--") {
       await db.insert(Armamento).values({
