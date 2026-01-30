@@ -1,256 +1,349 @@
+---
+import { Armamento, db, eq, InfoPNP, Personal, VidaSocial} from 'astro:db';
+
+// Realizamos el JOIN para traer Identidad, Info Laboral y Vida Social
+// El armamento lo manejaremos aparte por ser 1:N
+const allPersonal = await db.select()
+  .from(Personal)
+  .innerJoin(InfoPNP, eq(Personal.id, InfoPNP.personal_id))
+  .innerJoin(VidaSocial, eq(Personal.id, VidaSocial.personal_id));
+
+// Traemos todo el armamento para mapearlo después
+const listOfWeapons = await db.select().from(Armamento);
+---
+
 <div class="p-4">
-      <div class="overflow-x-auto rounded-box border border-white bg-base-200">
-        <table class="table table-lg w-full">
+  <div class="overflow-x-auto rounded-box border border-white bg-base-200">
+    <table class="table table-lg w-full">
 
-          <thead class="">
-            <tr class="bg-base-200 text-center text-base *:border *:border-white">
-              <th rowspan="5">#</th>
-              <th rowspan="5">ACCIONES</th>
-              <th rowspan="5">FOTO</th>
-              <th rowspan="5">SUB UNIDAD y/o SITUACIÓN</th>
-              <th rowspan="5">SEDE DEPINCRI</th>
-              <th rowspan="5">AREA Y/U OFICINA</th>
-              <th rowspan="5">GRADO</th>
-              <th rowspan="5">APELLIDOS Y NOMBRES</th>
-              <th colspan="3">NATURALEZA</th>
-              <th rowspan="5">FECHA NACIMIEN.</th>
-              <th rowspan="5">EDAD</th>
-              <th rowspan="5">DNI</th>
-              <th rowspan="5">CODIGO DNI</th>
-              <th rowspan="5">INGRESO PNP</th>
-              <th rowspan="5">EGRESO PNP</th>
-              <th colspan="3">TIEMPO DE SERVICIOS (Reales y Efectivos)</th>
-              <th rowspan="5">CODIGO y/o ESPECIALIDAD</th>
-              <th colspan="4">CARNET DE IDENTIDAD PERSONAL (CIP)</th>
-              <th rowspan="5">ULTIMO ASCENSO</th>
-              <th rowspan="5">INCORP. DIVPOL-CHYO</th>
-              <th rowspan="5">GRUPO SANG.</th>
-              <th rowspan="5">INCORP. DEPINCRI</th>
-              <th rowspan="5">CARGO</th>
-              <th rowspan="5">CODIGO CARGO</th>
-              <th rowspan="5">FUNCION Y HORARIO</th>
-              <th rowspan="5">APTITUD PSICOSOMATICA</th>
-              <th rowspan="5">PROCEDENCIA</th>
-              <th rowspan="5">SE INCORPORA AL DEPINCRI EN CALIDAD DE</th>
-              <th colspan="24">ARMAMENTO DE USO PARTICULAR Y/O DE EL ESTADO</th>
-              <th colspan="14">LICENCIA DE CONDUCIR</th>
-              <th rowspan="5">EC</th>
-              <th colspan="5">DOMICILIO</th>            
-              <th colspan="2">BANCO DE LA NACION</th>
-              <th colspan="3">CORREO ELECTRONICO</th>
-              <th colspan="6">TELEFONOS</th>
-              <th colspan="4">CAMBIADO Y/O REASIGNADO A OTRA SUB UNIDAD PNP</th>
-            </tr>
+      <thead class="">
+        <tr class="bg-base-200 text-center text-base *:border *:border-white">
+          <th rowspan="5">#</th>
+          <th rowspan="5">ACCIONES</th>
+          <th rowspan="5">FOTO</th>
+          <th rowspan="5">SUB UNIDAD y/o SITUACIÓN</th>
+          <th rowspan="5">SEDE DEPINCRI</th>
+          <th rowspan="5">AREA Y/U OFICINA</th>
+          <th rowspan="5">GRADO</th>
+          <th rowspan="5">APELLIDOS Y NOMBRES</th>
+          <th colspan="3">NATURALEZA</th>
+          <th rowspan="5">FECHA NACIMIEN.</th>
+          <th rowspan="5">EDAD</th>
+          <th rowspan="5">DNI</th>
+          <th rowspan="5">CODIGO DNI</th>
+          <th rowspan="5">INGRESO PNP</th>
+          <th rowspan="5">EGRESO PNP</th>
+          <th colspan="3">TIEMPO DE SERVICIOS (Reales y Efectivos)</th>
+          <th rowspan="5">CODIGO y/o ESPECIALIDAD</th>
+          <th colspan="4">CARNET DE IDENTIDAD PERSONAL (CIP)</th>
+          <th rowspan="5">ULTIMO ASCENSO</th>
+          <th rowspan="5">INCORP. DIVPOL-CHYO</th>
+          <th rowspan="5">GRUPO SANG.</th>
+          <th rowspan="5">INCORP. DEPINCRI</th>
+          <th rowspan="5">CARGO</th>
+          <th rowspan="5">CODIGO CARGO</th>
+          <th rowspan="5">FUNCION Y HORARIO</th>
+          <th rowspan="5">APTITUD PSICOSOMATICA</th>
+          <th rowspan="5">PROCEDENCIA</th>
+          <th rowspan="5">SE INCORPORA AL DEPINCRI EN CALIDAD DE</th>
+          <th colspan="24">ARMAMENTO DE USO PARTICULAR Y/O DE EL ESTADO</th>
+          <th colspan="14">LICENCIA DE CONDUCIR</th>
+          <th rowspan="5">EC</th>
+          <th colspan="5">DOMICILIO</th>            
+          <th colspan="2">BANCO DE LA NACION</th>
+          <th colspan="3">CORREO ELECTRONICO</th>
+          <th colspan="6">TELEFONOS</th>
+          <th colspan="4">CAMBIADO Y/O REASIGNADO A OTRA SUB UNIDAD PNP</th>
+        </tr>
 
-            <tr class="bg-base-200 text-center *:border *:border-white">
-              <th rowspan="4">DISTRITO</th>
-              <th rowspan="4">PROVINCIA</th>
-              <th rowspan="4">DEPTO</th>
-              <th rowspan="4">AÑOS</th>
-              <th rowspan="4">MESES</th>
-              <th rowspan="4">DIAS</th>
-              <th rowspan="4">ANTIGUO y/o CODOFÍN</th>
-              <th rowspan="4">CIP</th>
-              <th rowspan="4">SIT CIP</th>
-              <th rowspan="4">FECHA (Expedicion y/o Pérdida)</th>
-              <th colspan="12">PARTICULAR</th>            
-              <th colspan="12">ESTADO</th>
-              <th colspan="7">VEHICULO MAYOR (CAMIONETA Y/O AUTO)</th>            
-              <th colspan="7">VEHÍCULO MENOR (MOTOCICLETA)</th>            
-              <th rowspan="4">DIRRECION</th>
-              <th rowspan="4">REFERENCIA DOMICILIARIA</th>
-              <th rowspan="4">DISTRITO</th>
-              <th rowspan="4">PROVINCIA</th>
-              <th rowspan="4">DEPTO</th>
-              <th rowspan="4">N° CUENTA AHORROS</th>
-              <th rowspan="4">C.C.I</th>
-              <th colspan="2">PARTICULAR</th>
-              <th rowspan="4">INSTITUCIONAL</th>
-              <th rowspan="4">CASA</th>
-              <th colspan="5">CELULAR</th>
-              <th colspan="4">DOCUMENTO</th>
+        <tr class="bg-base-200 text-center *:border *:border-white">
+          <th rowspan="4">DISTRITO</th>
+          <th rowspan="4">PROVINCIA</th>
+          <th rowspan="4">DEPTO</th>
+          <th rowspan="4">AÑOS</th>
+          <th rowspan="4">MESES</th>
+          <th rowspan="4">DIAS</th>
+          <th rowspan="4">ANTIGUO y/o CODOFÍN</th>
+          <th rowspan="4">CIP</th>
+          <th rowspan="4">SIT CIP</th>
+          <th rowspan="4">FECHA (Expedicion y/o Pérdida)</th>
+          <th colspan="12">PARTICULAR</th>            
+          <th colspan="12">ESTADO</th>
+          <th colspan="7">VEHICULO MAYOR (CAMIONETA Y/O AUTO)</th>            
+          <th colspan="7">VEHÍCULO MENOR (MOTOCICLETA)</th>            
+          <th rowspan="4">DIRRECION</th>
+          <th rowspan="4">REFERENCIA DOMICILIARIA</th>
+          <th rowspan="4">DISTRITO</th>
+          <th rowspan="4">PROVINCIA</th>
+          <th rowspan="4">DEPTO</th>
+          <th rowspan="4">N° CUENTA AHORROS</th>
+          <th rowspan="4">C.C.I</th>
+          <th colspan="2">PARTICULAR</th>
+          <th rowspan="4">INSTITUCIONAL</th>
+          <th rowspan="4">CASA</th>
+          <th colspan="5">CELULAR</th>
+          <th colspan="4">DOCUMENTO</th>
 
-            </tr>
+        </tr>
 
-            <tr class="bg-base-200 text-center *:border *:border-white">
-              <th rowspan="3">TIPO</th>
-              <th rowspan="3">MARCA</th>
-              <th rowspan="3">MODELO</th>
-              <th rowspan="3">CALIBRE</th>
-              <th rowspan="3">N° SERIE</th>
-              <th colspan="5">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
-              <th colspan="2">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
-              <th rowspan="3">TIPO</th>
-              <th rowspan="3">MARCA</th>
-              <th rowspan="3">MODELO</th>
-              <th rowspan="3">CALIBRE</th>
-              <th rowspan="3">N° SERIE</th>
-              <th colspan="5">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
-              <th colspan="2">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
-              <th rowspan="3">PARTICULAR</th>
-              <th rowspan="3">POLICIAL</th>
-              <th rowspan="3">MILITAR</th>
-              <th rowspan="3">CLASE</th>
-              <th rowspan="3">CATEGORIA</th>
-              <th rowspan="3">F.EXPED.</th>
-              <th rowspan="3">F.CADUC.</th>
-              <th rowspan="3">PARTICULAR</th>
-              <th rowspan="3">POLICIAL</th>
-              <th rowspan="3">MILITAR</th>
-              <th rowspan="3">CLASE</th>
-              <th rowspan="3">CATEGORIA</th>
-              <th rowspan="3">F.EXPED.</th>
-              <th rowspan="3">F.CADUC.</th>
-              <th rowspan="3">GMAIL</th>
-              <th rowspan="3">HOTMAIL</th>
-              <th rowspan="3">RPC</th>
-              <th rowspan="3">MOV-RPC</th>
-              <th rowspan="3">ENTEL</th>
-              <th rowspan="3">BITEL</th>
-              <th rowspan="3">WHATSAPP</th>
-              <th rowspan="3">TIPO</th>
-              <th rowspan="3">N°</th>
-              <th rowspan="3">PROCEDENCIA</th>
-              <th rowspan="3">FECHA</th>
-            </tr>
+        <tr class="bg-base-200 text-center *:border *:border-white">
+          <th rowspan="3">TIPO</th>
+          <th rowspan="3">MARCA</th>
+          <th rowspan="3">MODELO</th>
+          <th rowspan="3">CALIBRE</th>
+          <th rowspan="3">N° SERIE</th>
+          <th colspan="5">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
+          <th colspan="2">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
+          <th rowspan="3">TIPO</th>
+          <th rowspan="3">MARCA</th>
+          <th rowspan="3">MODELO</th>
+          <th rowspan="3">CALIBRE</th>
+          <th rowspan="3">N° SERIE</th>
+          <th colspan="5">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
+          <th colspan="2">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
+          <th rowspan="3">PARTICULAR</th>
+          <th rowspan="3">POLICIAL</th>
+          <th rowspan="3">MILITAR</th>
+          <th rowspan="3">CLASE</th>
+          <th rowspan="3">CATEGORIA</th>
+          <th rowspan="3">F.EXPED.</th>
+          <th rowspan="3">F.CADUC.</th>
+          <th rowspan="3">PARTICULAR</th>
+          <th rowspan="3">POLICIAL</th>
+          <th rowspan="3">MILITAR</th>
+          <th rowspan="3">CLASE</th>
+          <th rowspan="3">CATEGORIA</th>
+          <th rowspan="3">F.EXPED.</th>
+          <th rowspan="3">F.CADUC.</th>
+          <th rowspan="3">GMAIL</th>
+          <th rowspan="3">HOTMAIL</th>
+          <th rowspan="3">RPC</th>
+          <th rowspan="3">MOV-RPC</th>
+          <th rowspan="3">ENTEL</th>
+          <th rowspan="3">BITEL</th>
+          <th rowspan="3">WHATSAPP</th>
+          <th rowspan="3">TIPO</th>
+          <th rowspan="3">N°</th>
+          <th rowspan="3">PROCEDENCIA</th>
+          <th rowspan="3">FECHA</th>
+        </tr>
 
-            <tr class="bg-base-200 text-center *:border *:border-white">
-              <th rowspan="2">N° CAF</th>
-              <th colspan="2">FECHA</th>
-              <th rowspan="2">LIBRO</th>
-              <th rowspan="2">FOLIO</th>
-              <th rowspan="2">N°</th>
-              <th rowspan="2">FECHA EMISIÓN</th>
-              <th rowspan="2">N° CAF</th>
-              <th colspan="2">FECHA</th>
-              <th rowspan="2">LIBRO</th>
-              <th rowspan="2">FOLIO</th>
-              <th rowspan="2">N°</th>
-              <th rowspan="2">FECHA EMISIÓN</th>
-            </tr>
+        <tr class="bg-base-200 text-center *:border *:border-white">
+          <th rowspan="2">N° CAF</th>
+          <th colspan="2">FECHA</th>
+          <th rowspan="2">LIBRO</th>
+          <th rowspan="2">FOLIO</th>
+          <th rowspan="2">N°</th>
+          <th rowspan="2">FECHA EMISIÓN</th>
+          <th rowspan="2">N° CAF</th>
+          <th colspan="2">FECHA</th>
+          <th rowspan="2">LIBRO</th>
+          <th rowspan="2">FOLIO</th>
+          <th rowspan="2">N°</th>
+          <th rowspan="2">FECHA EMISIÓN</th>
+        </tr>
 
-            <tr class="bg-base-200 text-center *:border *:border-white">
-              <th>EXPEDIC.</th>
-              <th>CADUCA</th>
-              <th>EXPEDIC.</th>
-              <th>CADUCA</th>
-            </tr>
-          </thead>
+        <tr class="bg-base-200 text-center *:border *:border-white">
+          <th>EXPEDIC.</th>
+          <th>CADUCA</th>
+          <th>EXPEDIC.</th>
+          <th>CADUCA</th>
+        </tr>
+      </thead>
 
-          <tbody class="select-none">
+      <tbody class="select-none">
+        {allPersonal.map(({ Personal: p, InfoPNP: i, VidaSocial: v }, index) => {
+          // Buscamos las armas asociadas a esta persona
+          const weaponPart = listOfWeapons.find(w => w.personal_id === p.id && w.tipo_procedencia === 'PARTICULAR');
+          const weaponEst = listOfWeapons.find(w => w.personal_id === p.id && w.tipo_procedencia === 'ESTADO');
+
+          return (
             <tr class="hover:bg-base-300/50 transition-colors text-center text-xs *:border *:border-gray-500">
-              <th>1</th>
+              <th>{index + 1}</th>
               <td class="p-0">
                 <div class="inline-flex items-center justify-center gap-1 h-full w-full py-1">
-                  <button class="btn btn-square text-2xl btn-info">👁️</button>
-                  <button class="btn btn-square text-2xl btn-warning">📝</button>
+                  <!--TODO: Falta hacer el Editar -->
+                  <button class="btn btn-square text-2xl btn-info btn-xs" title="Editar">✏️</button>
+                  <button value={p.id} name={p.apellidos_nombres} class="btn btn-square text-2xl btn-error btn-xs btn-delete-personal" title="Eliminar">🗑️</button>
                 </div>
               </td>
 
               <td class="p-0">
                 <div class="flex items-center justify-center h-full w-full">
                   <div class="avatar">
-                    <div class=" block">
-                      <button class="cursor-pointer p-2 hover:scale-105 transition-transform">
-                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Avatar" class="w-full rounded-xl" />
+                    <div class="block">
+                      <button class="cursor-pointer p-2 hover:scale-105 transition-transform flex items-center justify-center">
+                        {p.foto !== "--" ? (
+                          <a href={p.foto} title="Ver Foto Completa" target="_blank" rel="noopener noreferrer">
+                            <img 
+                            src={p.foto} 
+                            alt="Avatar" 
+                            class="w-10 rounded-xl" 
+                          />
+                          </a>
+                        ) : (
+                          <span class="text-sm font-bold text-error leading-none text-center">
+                            NO<br/>FOTO
+                          </span>
+                        )}
                       </button>
                     </div>
                   </div>
                 </div>
               </td>
-              <td>DEPINCRI CHYO</td>
-              <td>SEDE CENTRAL</td>
-              <td>INVESTIGACIONES</td>
-              <td>MAYOR PNP</td>
-              <td class="font-bold">RAMIREZ PEREZ, JUAN CARLOS</td>
-              <td>CHICLAYO</td>
-              <td>CHICLAYO</td>
-              <td>LAMBAYEQUE</td>
-              <td>15/05/1985</td>
-              <td>39</td>
-              <td>45678912</td>
-              <td>01</td>
-              <td>01/01/2005</td>
-              <td>--</td>
-              <td>19</td>
-              <td>06</td>
-              <td>18</td>
-              <td>ESP-001</td>
-              <td>A1</td>
-              <td>31245678</td>
-              <td>VIGENTE</td>
-              <td>12/10/2023</td>
-              <td>01/01/2024</td>
-              <td>15/01/2023</td>
-              <td>O+</td>
-              <td>10/02/2024</td>
-              <td>JEFE GRUPO</td>
-              <td>CG-45</td>
-              <td>08:00 - 20:00</td>
-              <td>APTO</td>
-              <td>LIMA</td>
-              <td>TITULAR</td>
-              <td>PISTOLA</td>
-              <td>GLOCK</td>
-              <td>17 GEN 4</td>
-              <td>9mm Parab.</td>
-              <td>AB12345</td>
-              <td>CAF-9988</td>
-              <td>10/01/2024</td>
-              <td>10/01/2027</td>
-              <td>L-150</td>
-              <td>F-45</td>
-              <td>987654</td>
-              <td>15/01/2024</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-              <td>SI</td>
-              <td>--</td>
-              <td>--</td>
-              <td>A</td>
-              <td>II-B</td>
-              <td>20/05/2020</td>
-              <td>20/05/2028</td>
-              <td>SI</td>
-              <td>--</td>
-              <td>--</td>
-              <td>B</td>
-              <td>II-C</td>
-              <td>15/08/2021</td>
-              <td>15/08/2026</td>
-              <td>S</td>
-              <td>AV. SÁENZ PEÑA 123</td>
-              <td>FRENTE AL PARQUE</td>
-              <td>CHICLAYO</td>
-              <td>CHICLAYO</td>
-              <td>LAMBAYEQUE</td>
-              <td>000456123</td>
-              <td>01800000045612301</td>
-              <td>juan.per@gmail.com</td>
-              <td>--</td>
-              <td>juan.perez@pnp.gob.pe</td>
-              <td>074-234567</td>
-              <td>987654321</td>
-              <td>--</td>
-              <td>955123456</td>
-              <td>--</td>
-              <td>987654321</td>
-              <td>RD</td>
-              <td>045-2024</td>
-              <td>DIVINCRI LIMA</td>
-              <td>01/02/2024</td>
+
+              {/* Datos Laborales e Identidad */}
+              <td>{i.sub_unidad_situacion}</td>
+              <td>{i.sede_depincri}</td>
+              <td>{i.area_oficina}</td>
+              <td>{p.grado}</td>
+              <td class="font-bold uppercase">{p.apellidos_nombres}</td>
+              <td>{p.distrito_nac}</td>
+              <td>{p.provincia_nac}</td>
+              <td>{p.depto_nac}</td>
+              <td>{p.fecha_nac}</td>
+              <td>{p.edad}</td>
+              <td>{p.dni}</td>
+              <td>{p.codigo_dni}</td>
+              <td>{i.ingreso_pnp}</td>
+              <td>{i.egreso_pnp}</td>
+              <td>{i.tiempo_servicio_anios}</td>
+              <td>{i.tiempo_servicio_meses}</td>
+              <td>{i.tiempo_servicio_dias}</td>
+              <td>{i.codigo_especialidad}</td>
+
+              {/* CIP */}
+              <td>{i.cip_antiguo_codofin}</td>
+              <td>{i.cip_numero}</td>
+              <td>{i.cip_situacion}</td>
+              <td>{i.cip_fecha_expedicion}</td>
+
+              {/* Mas Datos Laborales */}
+              <td>{i.ultimo_ascenso}</td>
+              <td>{i.incorp_divpol_chyo}</td>
+              <td>{i.grupo_sanguineo}</td>
+              <td>{i.incorp_depincri}</td>
+              <td>{i.cargo}</td>
+              <td>{i.codigo_cargo}</td>
+              <td>{i.funcion_horario}</td>
+              <td>{i.aptitud_psicosomatica}</td>
+              <td>{i.procedencia}</td>
+              <td>{i.calidad_incorporacion}</td>
+
+              {/* ARMAMENTO PARTICULAR (12 columnas) */}
+              <td>{weaponPart?.tipo_arma || "--"}</td>
+              <td>{weaponPart?.marca || "--"}</td>
+              <td>{weaponPart?.modelo || "--"}</td>
+              <td>{weaponPart?.calibre || "--"}</td>
+              <td>{weaponPart?.serie || "--"}</td>
+              <td>{weaponPart?.caf_num || "--"}</td>
+              <td>{weaponPart?.caf_exped || "--"}</td>
+              <td>{weaponPart?.caf_caduca || "--"}</td>
+              <td>{weaponPart?.caf_libro || "--"}</td>
+              <td>{weaponPart?.caf_folio || "--"}</td>
+              <td>{weaponPart?.tarjeta_num || "--"}</td>
+              <td>{weaponPart?.tarjeta_emision || "--"}</td>
+
+              {/* ARMAMENTO ESTADO (12 columnas) */}
+              <td>{weaponEst?.tipo_arma || "--"}</td>
+              <td>{weaponEst?.marca || "--"}</td>
+              <td>{weaponEst?.modelo || "--"}</td>
+              <td>{weaponEst?.calibre || "--"}</td>
+              <td>{weaponEst?.serie || "--"}</td>
+              <td>{weaponEst?.caf_num || "--"}</td>
+              <td>{weaponEst?.caf_exped || "--"}</td>
+              <td>{weaponEst?.caf_caduca || "--"}</td>
+              <td>{weaponEst?.caf_libro || "--"}</td>
+              <td>{weaponEst?.caf_folio || "--"}</td>
+              <td>{weaponEst?.tarjeta_num || "--"}</td>
+              <td>{weaponEst?.tarjeta_emision || "--"}</td>
+
+              {/* LICENCIAS (Vehículo Mayor) */}
+              <td>{v.lic_mayor_particular}</td>
+              <td>{v.lic_mayor_policial}</td>
+              <td>{v.lic_mayor_militar}</td>
+              <td>{v.lic_mayor_clase}</td>
+              <td>{v.lic_mayor_categoria}</td>
+              <td>{v.lic_mayor_f_exped}</td>
+              <td>{v.lic_mayor_f_caduc}</td>
+
+              {/* LICENCIAS (Vehículo Menor) */}
+              <td>{v.lic_menor_particular}</td>
+              <td>{v.lic_menor_policial}</td>
+              <td>{v.lic_menor_militar}</td>
+              <td>{v.lic_menor_clase}</td>
+              <td>{v.lic_menor_categoria}</td>
+              <td>{v.lic_menor_f_exped}</td>
+              <td>{v.lic_menor_f_caduc}</td>
+
+              {/* ESTADO CIVIL Y DOMICILIO */}
+              <td>{v.estado_civil}</td>
+              <td>{v.direccion}</td>
+              <td>{v.referencia_domiciliaria}</td>
+              <td>{v.distrito_dom}</td>
+              <td>{v.provincia_dom}</td>
+              <td>{v.depto_dom}</td>
+
+              {/* BANCO DE LA NACIÓN */}
+              <td>{v.bn_cuenta_corriente}</td>
+              <td>{v.bn_cci}</td>
+
+              {/* CORREOS */}
+              <td>{v.email_gmail}</td>
+              <td>{v.email_hotmail}</td>
+              <td>{v.email_institucional}</td>
+
+              {/* TELÉFONOS */}
+              <td>{v.telf_casa}</td>
+              <td>{v.telf_rpc}</td>
+              <td>{v.telf_rpm}</td>
+              <td>{v.telf_entel}</td>
+              <td>{v.telf_bitel}</td>
+              <td>{v.telf_wsp}</td>
+
+              {/* REASIGNACIÓN */}
+              <td>{v.reasig_tipo_doc}</td>
+              <td>{v.reasig_num}</td>
+              <td>{v.reasig_procedencia}</td>
+              <td>{v.reasig_fecha}</td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+          );
+          
+        })}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const deleteButtons = document.querySelectorAll('.btn-delete-personal');
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener('click', async (e) => {
+        const btn = e.currentTarget;
+        const id = btn.value;
+        const nombre = btn.name;
+
+        if (!id) return;
+        
+        if (!confirm('¿Estás seguro de eliminar a ' + nombre + '? Esta acción es irreversible.')) return;
+
+        try {
+          const response = await fetch('/api/personal/' + id, {
+            method: 'DELETE'
+          });
+
+          if (response.ok) {
+            window.location.reload();
+          } else {
+            const data = await response.json();
+            alert('Error: ' + (data.error || 'No se pudo eliminar'));
+          }
+        } catch (err) {
+          alert('Ocurrió un error al intentar conectar con el servidor.');
+        }
+      });
+    });
+  });
+</script>
