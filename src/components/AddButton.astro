@@ -267,3 +267,50 @@
     margin-top: 2px;
   }
 </style>
+
+<script>
+  import { personalSchema } from "@/lib/schemas/personal";
+
+  // 1. Seleccionamos el formulario
+  const form = document.querySelector('form[method="dialog"]');
+  const addModal = document.getElementById('add_modal') as HTMLDialogElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form as HTMLFormElement);
+    const data = Object.fromEntries(formData);
+
+    try {
+      // 2. Validación rápida en el cliente (opcional pero recomendada)
+      personalSchema.parse(data);
+
+      // 3. Enviamos los datos a la API que creamos
+      const response = await fetch('/api/personal', {
+        method: 'POST',
+        body: formData, // Enviamos formData directamente por el manejo de archivos (foto)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("¡Registro guardado exitosamente en las 4 tablas!");
+        (form as HTMLFormElement).reset(); // Limpiamos el formulario
+        addModal.close(); // Cerramos el modal
+        
+        // Opcional: Recargar la página para ver los cambios en la tabla
+        window.location.reload();
+      } else {
+        alert(`Error: ${result.error}`);
+      }
+    } catch (error: any) {
+      if (error.errors) {
+        // Errores de Zod
+        const messages = error.errors.map((err: any) => err.message).join("\n");
+        alert(`Validación fallida:\n${messages}`);
+      } else {
+        alert("Ocurrió un error inesperado al enviar el formulario.");
+      }
+    }
+  });
+</script>
