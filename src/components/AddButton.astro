@@ -2,8 +2,8 @@
 ---
 <div class="p-4">
     <div class="flex justify-end mb-4">
-      <button class="btn btn-success text-white shadow-lg" onclick="add_modal.showModal()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <button class="btn btn-success text-white shadow-lg" onclick="prepararNuevoRegistro(); add_modal.showModal()">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
         AGREGAR PERSONAL
@@ -25,10 +25,16 @@
     
     <form id="form_personal" class="m-6 overflow-y-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
         <div class="flex flex-col gap-3">
-          <h4 class="font-bold text-primary border-b border-primary/40 text-xs">I. IDENTIDAD Y GRADO</h4>
+          <h4 class="font-bold text-primary border-b border-primary/40 text-xs">I. IDENTIDAD Y GRADO</h4>          
           <input type="file" name="foto" class="file-input file-input-bordered file-input-xs w-full" accept="image/*" />
+          <p class="text-[10px] uppercase font-bold opacity-50 text-center">Foto Actual</p>
+          <img 
+            id="modal_preview_foto" 
+            src="" 
+            class="w-11/12 h-40 object-cover rounded-lg border-2 border-primary/20 shadow-md hidden mx-auto" 
+            alt="Vista previa edición"
+          />
           <input type="text" name="sub_unidad_situacion" placeholder="SUB UNIDAD / SITUACIÓN" class="input input-bordered input-xs w-full" />
           <input type="text" name="sede_depincri" placeholder="SEDE DEPINCRI" class="input input-bordered input-xs w-full" />
           <input type="text" name="area_oficina" placeholder="AREA Y/U OFICINA" class="input input-bordered input-xs w-full" />
@@ -268,50 +274,117 @@
   }
 </style>
 
-<!--POST -->
 <script>
   import { personalSchema } from "@/lib/schemas/personal";
 
-  // 1. Seleccionamos el formulario
+  // Seleccionamos los elementos una sola vez
   const form = document.getElementById('form_personal') as HTMLFormElement;
-  const addModal = document.getElementById('add_modal') as HTMLDialogElement;
+  const modal = document.getElementById('add_modal') as HTMLDialogElement;
+  const submitBtn = form?.querySelector('button[type="submit"]');
+  const modalPreview = document.getElementById('modal_preview_foto') as HTMLImageElement;
 
+  // --- A. LÓGICA DE ENVÍO (POST / PUT) ---
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const mode = form.getAttribute('data-mode');
+    const id = form.getAttribute('data-id');
 
-    const formData = new FormData(form as HTMLFormElement);
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData);
 
     try {
-      // 2. Validación rápida en el cliente (opcional pero recomendada)
       personalSchema.parse(data);
 
-      // 3. Enviamos los datos a la API que creamos
-      const response = await fetch('/api/personal', {
-        method: 'POST',
-        body: formData, // Enviamos formData directamente por el manejo de archivos (foto)
+      // Decidimos URL y Método según el modo
+      const url = mode === 'edit' ? `/api/personal/${id}` : '/api/personal';
+      const method = mode === 'edit' ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
+        body: formData,
       });
 
-      const result = await response.json();
-
       if (response.ok) {
-        alert("¡Registro guardado exitosamente en las 4 tablas!");
-        (form as HTMLFormElement).reset(); // Limpiamos el formulario
-        addModal.close(); // Cerramos el modal
-        
-        // Opcional: Recargar la página para ver los cambios en la tabla
+        alert(mode === 'edit' ? "¡Registro actualizado con éxito!" : "¡Registro guardado!");
         window.location.reload();
       } else {
+        const result = await response.json();
         alert(`Error: ${result.error}`);
       }
     } catch (error: any) {
       if (error.errors) {
-        // Errores de Zod
         const messages = error.errors.map((err: any) => err.message).join("\n");
         alert(`Validación fallida:\n${messages}`);
       } else {
-        alert("Ocurrió un error inesperado al enviar el formulario.");
+        alert("Ocurrió un error inesperado.");
       }
     }
   });
+
+  // --- B. LÓGICA DE ESCUCHA PARA EDITAR ---
+  window.addEventListener('abrir-editar-personal', async (e: any) => {
+    const id = e.detail.id;
+    if (!form || !modal) return;
+
+    form.reset();
+
+    try {
+      const response = await fetch(`/api/personal/${id}`);
+      const data = await response.json();
+
+      const fill = (obj: any) => {
+        if (!obj) return;
+        Object.entries(obj).forEach(([key, value]) => {
+          const input = form.querySelector(`[name="${key}"]`) as HTMLInputElement;
+          if (input) {
+            if (input.type === 'file') return; // Saltamos el input de archivo
+            input.value = (value !== null && value !== undefined) ? String(value) : "";
+          }
+        });
+      };
+
+      fill(data.Personal);
+      fill(data.InfoPNP);
+      fill(data.VidaSocial);
+
+      // Lógica de la foto
+      if (modalPreview) {
+        if (data.Personal.foto && data.Personal.foto !== "--") {
+          modalPreview.src = data.Personal.foto;
+          modalPreview.classList.remove('hidden');
+        } else {
+          modalPreview.classList.add('hidden');
+        }
+      }
+
+      // Cambiamos a MODO EDICIÓN
+      form.setAttribute('data-mode', 'edit');
+      form.setAttribute('data-id', id);
+      if (submitBtn) submitBtn.textContent = "ACTUALIZAR REGISTRO";
+      const title = modal.querySelector('h3');
+      if (title) title.textContent = "✏️ EDITANDO REGISTRO DE PERSONAL";
+
+      modal.showModal();
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
+
+  // --- C. FUNCIÓN DE LIMPIEZA (La que no veías) ---
+  // La exponemos a window para que el onclick del botón HTML pueda verla
+  (window as any).prepararNuevoRegistro = () => {
+    if (!form) return;
+    form.reset();
+    form.removeAttribute('data-mode');
+    form.removeAttribute('data-id');
+
+    if (modalPreview) {
+      modalPreview.src = "";
+      modalPreview.classList.add('hidden');
+    }
+
+    if (submitBtn) submitBtn.textContent = "GUARDAR REGISTRO";
+    const title = modal?.querySelector('h3');
+    if (title) title.textContent = "Ficha Integral de Registro de Personal";
+  };
 </script>
