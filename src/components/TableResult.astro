@@ -163,7 +163,7 @@ const listOfWeapons = await db.select().from(Armamento);
               <td class="p-0">
                 <div class="inline-flex items-center justify-center gap-1 h-full w-full py-1">
                   <!--TODO: Falta hacer el Editar -->
-                  <button class="btn btn-square text-2xl btn-info btn-xs" title="Editar">✏️</button>
+                  <button value={p.id} class="btn btn-square text-2xl btn-info btn-xs btn-edit-personal" title="Editar">✏️</button>
                   <button value={p.id} name={p.apellidos_nombres} class="btn btn-square text-2xl btn-error btn-xs btn-delete-personal" title="Eliminar">🗑️</button>
                 </div>
               </td>
@@ -316,34 +316,46 @@ const listOfWeapons = await db.select().from(Armamento);
 </div>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const deleteButtons = document.querySelectorAll('.btn-delete-personal');
+  document.addEventListener('click', async (e) => {
+    const target = e.target
 
-    deleteButtons.forEach((button) => {
-      button.addEventListener('click', async (e) => {
-        const btn = e.currentTarget;
-        const id = btn.value;
-        const nombre = btn.name;
+    // --- ACCIÓN: EDITAR ---
+    const editBtn = target.closest('.btn-edit-personal');
+    if (editBtn) {
+      const id = editBtn.value;
+      console.log("1. [TABLA] Clic en Editar ID:", id);
 
-        if (!id) return;
-        
-        if (!confirm('¿Estás seguro de eliminar a ' + nombre + '? Esta acción es irreversible.')) return;
+      // Lanzamos el evento para que AddButton lo reciba
+      window.dispatchEvent(new CustomEvent('abrir-editar-personal', {
+        detail: { id: id }
+      }));
+      return;
+    }
 
-        try {
-          const response = await fetch('/api/personal/' + id, {
-            method: 'DELETE'
-          });
+    // --- ACCIÓN: ELIMINAR ---
+    const deleteBtn = target.closest('.btn-delete-personal');
+    if (deleteBtn) {
+      const id = deleteBtn.value;
+      const nombre = deleteBtn.getAttribute('name') || "este registro";
 
-          if (response.ok) {
-            window.location.reload();
-          } else {
-            const data = await response.json();
-            alert('Error: ' + (data.error || 'No se pudo eliminar'));
-          }
-        } catch (err) {
-          alert('Ocurrió un error al intentar conectar con el servidor.');
+      if (!id) return;
+      if (!confirm(`¿Estás seguro de eliminar a ${nombre}?`)) return;
+
+      try {
+        const response = await fetch(`/api/personal/${id}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          const result = await response.json();
+          alert('Error: ' + (result.error || 'No se pudo eliminar'));
         }
-      });
-    });
+      } catch (err) {
+        console.error("Error al intentar eliminar:", err);
+        alert('Ocurrió un error al conectar con el servidor.');
+      }
+    }
   });
 </script>
