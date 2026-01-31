@@ -5,7 +5,7 @@ const ACCEPTED_EXTENSIONS = ['jpg', 'jpeg', 'png'];
 // Función para transformar campos vacíos en "--"
 const optionalField = z.string()
     .optional()
-    .transform((val) => (!val || val.trim() === "") ? "--" : val);
+    .transform((val) => (!val || val.trim() === "") ? "" : val);
 
 export const personalSchema = z.object({
     // I. IDENTIDAD Y GRADO
