@@ -175,7 +175,8 @@ const listOfWeapons = await db.select().from(Armamento);
                       <button class="cursor-pointer p-2 hover:scale-105 transition-transform flex items-center justify-center">
                         {p.foto !== "--" ? (
                           <a href={p.foto} title="Ver Foto Completa" target="_blank" rel="noopener noreferrer">
-                            <img 
+                            <img
+                            id="preview_foto" 
                             src={p.foto} 
                             alt="Avatar" 
                             class="w-10 rounded-xl" 
@@ -311,17 +312,19 @@ const listOfWeapons = await db.select().from(Armamento);
           
         })}
       </tbody>
+
     </table>
   </div>
 </div>
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+<!--DELETE-->
+<script>
     const deleteButtons = document.querySelectorAll('.btn-delete-personal');
 
     deleteButtons.forEach((button) => {
       button.addEventListener('click', async (e) => {
-        const btn = e.currentTarget;
+        const btn = e.currentTarget as HTMLButtonElement;
+        if (!btn) return;
         const id = btn.value;
         const nombre = btn.name;
 
@@ -345,5 +348,24 @@ const listOfWeapons = await db.select().from(Armamento);
         }
       });
     });
-  });
+</script>
+
+<!--Disparador de Evento para el EDIT -->
+<script>
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!(target instanceof HTMLElement)) return;
+    const btn = target.closest('.btn-edit-personal') as HTMLButtonElement;
+
+    if (!btn) return;
+      const id = btn.value;
+
+      // Lanzamos un evento personalizado que AddButton escuchará
+      const editEvent = new CustomEvent('abrir-editar-personal', {
+        detail: { id }
+      });
+
+      window.dispatchEvent(editEvent);
+    }
+  );
 </script>
