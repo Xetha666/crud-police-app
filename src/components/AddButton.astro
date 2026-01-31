@@ -23,7 +23,7 @@
       <button class="btn btn-circle btn-ghost btn-sm" onclick="add_modal.close()">✕</button>
     </div>
     
-    <form method="dialog" class="m-6 overflow-y-auto">
+    <form id="form_personal" class="m-6 overflow-y-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <div class="flex flex-col gap-3">
@@ -257,8 +257,8 @@
       </div>
     </form>
   </div>
-  <form method="dialog" class="modal-backdrop backdrop-blur-md">
-    <button>close</button>
+  <form class="modal-backdrop backdrop-blur-md">
+    <button type="button" onclick="add_modal.close()">close</button>
   </form>
 </dialog>
 
@@ -268,11 +268,12 @@
   }
 </style>
 
+<!--POST -->
 <script>
   import { personalSchema } from "@/lib/schemas/personal";
 
   // 1. Seleccionamos el formulario
-  const form = document.querySelector('form[method="dialog"]');
+  const form = document.getElementById('form_personal') as HTMLFormElement;
   const addModal = document.getElementById('add_modal') as HTMLDialogElement;
 
   form?.addEventListener('submit', async (e) => {
