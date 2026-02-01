@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ArrowLeft from "/public/svg/arrow-left.svg";
+---
+
+<Layout>
+    <main class="h-screen w-full grid place-items-center gap-4">
+        <header>
+            <h1 class="text-5xl text-center">404 - Pagina no encontrada</h1>
+            <p class="text-center my-2">Perdon pero la pagina que buscas no existe</p>
+        </header>
+        <footer class="flex justify-center items-center">
+            <ArrowLeft class="size-6 inline mr-2" />
+            <a class="text-center text-xl hover:underline" href="/">Regresar a la pagina principal</a>
+        </footer>
+    </main>
+</Layout>
+
+<style>
+    main {
+        display: grid;
+        grid-template-rows: 1fr auto 1fr;
+    }
+</style>
