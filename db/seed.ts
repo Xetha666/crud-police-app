@@ -2,6 +2,8 @@ import { db, User } from 'astro:db';
 import bcrypt from 'bcryptjs';
 import 'dotenv/config';
 
+
+
 export default async function seed() {
   const password = process.env.DB_USER_PASSWORD;
 
@@ -10,8 +12,9 @@ export default async function seed() {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedTestPassword = await bcrypt.hash("test123", 10);
   
-  //await db.delete(User);
+  await db.delete(User);
 
   await db.insert(User).values([
     { 
@@ -19,6 +22,14 @@ export default async function seed() {
       username: "Edgard2692", 
       password: hashedPassword,
       name: "Edgard" 
+    },
+    { 
+      id: "2", 
+      username: "test", 
+      password: hashedTestPassword,
+      name: "Test User" 
     }
   ]);
+  const users = await db.select().from(User);
+  console.log('Usuarios existentes en la base de datos:', users);
 }
