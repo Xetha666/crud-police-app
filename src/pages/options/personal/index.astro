@@ -2,9 +2,13 @@
 import AddButton from "@/components/AddButton.astro";
 import TableResult from "@/components/TableResult.astro";
 import Layout from "@/layouts/Layout.astro";
+import ArrowLeft from "/public/svg/arrow-left.svg";
 ---
 
 <Layout title="Personal Depincri">
+  <a href="/options" class="absolute top-4 left-4">
+    <ArrowLeft class="size-6 text-white hover:scale-110 transition-transform" />
+  </a>
   <main>
     <AddButton/>
     <TableResult/>
