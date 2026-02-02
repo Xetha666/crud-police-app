@@ -8,3 +8,27 @@
     color-scheme: dark;
 }
 
+ @media print {
+  th, td {
+    border: 1px solid black;
+    color : black;
+  }
+  thead tr th{
+    border: 1px solid black;
+    color : black;
+  }
+  table {
+    border-radius: initial;
+    border: 1px solid black;
+    width: 100%;
+    table-layout: auto;
+    color: black;
+    background: white;
+  }
+
+  /* Ocultamos botones, barra de búsqueda y navegación al imprimir */
+  .btn, .nav, .sidebar, .filtros-container {
+    display: none !important;
+  }
+} 
+
