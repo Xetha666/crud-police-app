@@ -2,13 +2,11 @@
 import ArrowLeft from "/public/svg/arrow-left.svg";
 ---
 
-<div class="relative h-screen flex flex-col justify-center gap-8">
+<div class="relative h-screen flex flex-col justify-center gap-8 animate-fade-in">
   <a href="/" class="btn btn-square size-12 p-0 m-0 absolute top-16 left-16 group bg-base-300">
     <ArrowLeft class="group-hover:scale-110 group-hover:transition-transform group-active:scale-90 p-1" />
   </a>
-  <h1
-    class="h-16 text-center text-5xl font-bold bg-linear-to-r from-white/90 to-black/10 bg-clip-text text-transparent"
-  >
+  <h1 class="h-16 text-center text-5xl font-bold bg-linear-to-r from-white/90 to-black/10 bg-clip-text text-transparent">
     Login
   </h1>
   <form id="login-form" method="POST" class="flex items-center justify-center">
