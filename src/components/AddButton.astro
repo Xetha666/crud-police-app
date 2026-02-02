@@ -2,7 +2,7 @@
 ---
 <div class="p-4">
     <div class="flex justify-end mb-4">
-      <button class="btn btn-success text-white shadow-lg" onclick="prepararNuevoRegistro(); add_modal.showModal()">
+      <button class="btn btn-success text-white shadow-lg animate-fade-in-left" onclick="prepararNuevoRegistro(); add_modal.showModal()">
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
@@ -10,10 +10,7 @@
       </button>
     </div>
 
-    <div class="overflow-x-auto rounded-box border border-white bg-base-200 shadow-xl">
-      <table class="table table-lg w-full select-none">
-        </table>
-    </div>
+    <div class="overflow-x-auto rounded-box border border-white bg-base-200 shadow-xl animate-fade-in"></div>
 </div>
 
 <dialog id="add_modal" class="modal backdrop:backdrop-blur-md">
@@ -86,10 +83,10 @@
           </div>
 
           <div class="grid grid-cols-2 gap-2">
-            <input type="text" name="ultimo_ascenso" placeholder="ULTIMO ASCENSO" class="input input-bordered input-xs" />
+            <input type="date" title="Ultimo Ascenso" name="ultimo_ascenso" placeholder="ULTIMO ASCENSO" class="input input-bordered input-xs" />
+            <input type="date" title="Ultimo Incorporacion DIVPOL CHYO" name="incorp_divpol_chyo" placeholder="INCORP. DIVPOL-CHYO" class="input input-bordered input-xs"/>
             <input type="text" name="grupo_sanguineo" placeholder="GRUPO SANG." class="input input-bordered input-xs" />
-            <input type="text" name="incorp_divpol_chyo" placeholder="INCORP. DIVPOL-CHYO" class="input input-bordered input-xs" />
-            <input type="text" name="incorp_depincri" placeholder="INCORP. DEPINCRI" class="input input-bordered input-xs" />
+            <input type="date" title="Incorporacion Depincri" name="incorp_depincri" placeholder="INCORP. DEPINCRI" class="input input-bordered input-xs" />
             <input type="text" name="cargo" placeholder="CARGO" class="input input-bordered input-xs" />
             <input type="text" name="codigo_cargo" placeholder="COD. CARGO" class="input input-bordered input-xs" />
             <input type="text" name="funcion_horario" placeholder="FUNCION Y HORARIO" class="input input-bordered input-xs" />
@@ -263,9 +260,10 @@
       </div>
     </form>
   </div>
-  <form class="modal-backdrop backdrop-blur-md">
+  <!--Funcionalidad ESCAPE-->
+  <!-- <form class="modal-backdrop backdrop-blur-md">
     <button type="button" onclick="add_modal.close()">close</button>
-  </form>
+  </form> -->
 </dialog>
 
 <style>
@@ -277,11 +275,28 @@
 <script>
   import { personalSchema } from "@/lib/schemas/personal";
 
-  // Seleccionamos los elementos una sola vez
   const form = document.getElementById('form_personal') as HTMLFormElement;
   const modal = document.getElementById('add_modal') as HTMLDialogElement;
   const submitBtn = form?.querySelector('button[type="submit"]');
   const modalPreview = document.getElementById('modal_preview_foto') as HTMLImageElement;
+
+  // Esto detiene el cierre automático del navegador
+  window.addEventListener('keydown', (event) => {
+    // Solo actuamos si la modal está abierta y se presiona Escape
+    if (event.key === 'Escape' && modal?.open) {
+      // 1. Prevenir que la modal se cierre
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      const activeElement = document.activeElement as HTMLInputElement;
+
+      const isInput = activeElement && (activeElement.tagName === 'INPUT');
+
+      if (isInput) {
+        activeElement.value = "";
+      }
+    }
+  }, true);
 
   // --- A. LÓGICA DE ENVÍO (POST / PUT) ---
   form?.addEventListener('submit', async (e) => {
@@ -371,7 +386,6 @@
   });
 
   // --- C. FUNCIÓN DE LIMPIEZA (La que no veías) ---
-  // La exponemos a window para que el onclick del botón HTML pueda verla
   (window as any).prepararNuevoRegistro = () => {
     if (!form) return;
     form.reset();
