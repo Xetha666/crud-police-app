@@ -1,0 +1,44 @@
+  <div class="dropdown dropdown-bottom">
+    <div tabindex="0" role="button" class="btn btn-outline btn-primary">
+      👁️ Columnas Visibles
+    </div>
+    <ul tabindex="0" class="dropdown-content z-1 menu p-4 shadow bg-base-100 rounded-box w-64 border border-white/10">
+      <h3 class="font-bold mb-2 text-xs opacity-50 uppercase">Columnas</h3>
+      <li>
+        <label class="label cursor-pointer justify-start gap-3">
+          <input type="checkbox" checked class="checkbox checkbox-xs checkbox-primary col-toggle" data-column="col-naturaleza" />
+          <span class="label-text">Naturaleza</span>
+        </label>
+      </li>
+      <li>
+        <label class="label cursor-pointer justify-start gap-3">
+          <input type="checkbox" checked class="checkbox checkbox-xs checkbox-primary col-toggle" data-column="col-foto" />
+          <span class="label-text">Foto</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <button class="btn btn-secondary" onclick="window.print()">
+    🖨️ Imprimir Reporte
+  </button>
+
+<script>
+  const toggles = document.querySelectorAll('.col-toggle');
+
+  toggles.forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      const columnClass = target.dataset.column;
+      const elements = document.querySelectorAll(`.${columnClass}`);
+      
+      elements.forEach(el => {
+        if (target.checked) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
