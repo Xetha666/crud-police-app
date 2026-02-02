@@ -254,7 +254,6 @@ import Filters from "@/components/Filters.astro";
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="modal-action sticky bottom-0 bg-base-200 py-4 border-t border-white/10 mt-6 flex  z-20">
@@ -263,10 +262,6 @@ import Filters from "@/components/Filters.astro";
       </div>
     </form>
   </div>
-  <!--Funcionalidad ESCAPE-->
-  <!-- <form class="modal-backdrop backdrop-blur-md">
-    <button type="button" onclick="add_modal.close()">close</button>
-  </form> -->
 </dialog>
 
 <style>
@@ -276,7 +271,6 @@ import Filters from "@/components/Filters.astro";
 </style>
 
 <script>
-  const inputIngreso = document.querySelector('[name="ingreso_pnp"]') as HTMLInputElement;
   const inputEgreso = document.querySelector('[name="egreso_pnp"]') as HTMLInputElement;
   
   const camposTiempo = [
@@ -286,11 +280,9 @@ import Filters from "@/components/Filters.astro";
   ];
 
   function actualizarTiempoServicio() {
-    const fInicio = inputIngreso?.value;
-    const fFin = inputEgreso?.value;
+    const fEgreso = inputEgreso?.value;
 
-    // Solo calculamos si AMBAS fechas están presentes
-    if (!fInicio || !fFin) {
+    if (!fEgreso) {
       camposTiempo.forEach(c => {
         if (c) {
           c.value = "";
@@ -300,39 +292,38 @@ import Filters from "@/components/Filters.astro";
       return;
     }
 
-    const inicio = new Date(fInicio);
-    const fin = new Date(fFin);
+    const egreso = new Date(fEgreso + 'T00:00:00');
+    const hoy = new Date();
 
-    if (fin < inicio) {
-        console.warn("Fecha de egreso inválida");
+    if (egreso > hoy) {
+        camposTiempo.forEach(c => { if(c) c.value = "0" });
+        alert("No puedes poner una fecha mayor a la de hoy, seras webón");
         return;
     }
 
-    // Lógica de resta de fechas
-    let anios = fin.getFullYear() - inicio.getFullYear();
-    let meses = fin.getMonth() - inicio.getMonth();
-    let dias = fin.getDate() - inicio.getDate();
+    // Lógica: HOY menos EGRESO
+    let years = hoy.getFullYear() - egreso.getFullYear();
+    let months = hoy.getMonth() - egreso.getMonth();
+    let days = hoy.getDate() - egreso.getDate();
 
-    if (dias < 0) {
-      meses--;
-      const ultimoDiaMesPasado = new Date(fin.getFullYear(), fin.getMonth(), 0).getDate();
-      dias += ultimoDiaMesPasado;
+    if (days < 0) {
+      months--;
+      const ultimoDiaMesPasado = new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+      days += ultimoDiaMesPasado;
     }
 
-    if (meses < 0) {
-      anios--;
-      meses += 12;
+    if (months < 0) {
+      years--;
+      months += 12;
     }
 
-    // Asignar valores y quitar opacidad
-    camposTiempo[0].value = anios.toString();
-    camposTiempo[1].value = meses.toString();
-    camposTiempo[2].value = dias.toString();
+    if (camposTiempo[0]) camposTiempo[0].value = years.toString();
+    if (camposTiempo[1]) camposTiempo[1].value = months.toString();
+    if (camposTiempo[2]) camposTiempo[2].value = days.toString();
     
-    /* camposTiempo.forEach(c => c?.classList.remove('opacity-50')); */
+    camposTiempo.forEach(c => c?.classList.remove('opacity-50'));
   }
 
-  inputIngreso?.addEventListener('change', actualizarTiempoServicio);
   inputEgreso?.addEventListener('change', actualizarTiempoServicio);
 </script>
 
@@ -388,12 +379,12 @@ import Filters from "@/components/Filters.astro";
         window.location.reload();
       } else {
         const result = await response.json();
-        alert(`Error: ${result.error}`);
-      }
+          alert(`Error: ${result.error}`);
+        }
     } catch (error: any) {
       if (error.errors) {
         const messages = error.errors.map((err: any) => err.message).join("\n");
-        alert(`Validación fallida:\n${messages}`);
+        alert(`Validación fallida - Formato requerido: ${messages}`);
       } else {
         alert("Ocurrió un error inesperado.");
       }
