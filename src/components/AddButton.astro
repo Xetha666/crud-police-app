@@ -1,7 +1,10 @@
 ---
+import Filters from "@/components/Filters.astro";
+
 ---
 <div class="p-4">
-    <div class="flex justify-end mb-4">
+    <div class="flex justify-end gap-2 mb-4">
+      <Filters/>
       <button class="btn btn-success text-white shadow-lg animate-fade-in-left" onclick="prepararNuevoRegistro(); add_modal.showModal()">
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -66,9 +69,9 @@
           <div class="p-2 rounded-lg border border-white/10 bg-base-100/50">
             <p class="text-[9px] font-black opacity-60 mb-2">TIEMPO SERVICIO (Reales y Efectivos)</p>
             <div class="grid grid-cols-3 gap-1">
-                <input type="text" name="tiempo_servicio_anios" placeholder="AÑOS" class="input input-bordered input-xs" />
-                <input type="text" name="tiempo_servicio_meses" placeholder="MES" class="input input-bordered input-xs" />
-                <input type="text" name="tiempo_servicio_dias" placeholder="DIAS" class="input input-bordered input-xs" />
+                <input type="text" name="tiempo_servicio_anios" placeholder="AÑOS" class="input input-bordered input-xs" readonly />
+                <input type="text" name="tiempo_servicio_meses" placeholder="MES" class="input input-bordered input-xs" readonly />
+                <input type="text" name="tiempo_servicio_dias" placeholder="DIAS" class="input input-bordered input-xs" readonly />
             </div>
           </div>
           <input type="text" name="codigo_especialidad" placeholder="CODIGO y/o ESPECIALIDAD" class="input input-bordered input-xs" />
@@ -271,6 +274,67 @@
     margin-top: 2px;
   }
 </style>
+
+<script>
+  const inputIngreso = document.querySelector('[name="ingreso_pnp"]') as HTMLInputElement;
+  const inputEgreso = document.querySelector('[name="egreso_pnp"]') as HTMLInputElement;
+  
+  const camposTiempo = [
+    document.querySelector('[name="tiempo_servicio_anios"]') as HTMLInputElement,
+    document.querySelector('[name="tiempo_servicio_meses"]') as HTMLInputElement,
+    document.querySelector('[name="tiempo_servicio_dias"]') as HTMLInputElement
+  ];
+
+  function actualizarTiempoServicio() {
+    const fInicio = inputIngreso?.value;
+    const fFin = inputEgreso?.value;
+
+    // Solo calculamos si AMBAS fechas están presentes
+    if (!fInicio || !fFin) {
+      camposTiempo.forEach(c => {
+        if (c) {
+          c.value = "";
+          c.classList.add('opacity-50');
+        }
+      });
+      return;
+    }
+
+    const inicio = new Date(fInicio);
+    const fin = new Date(fFin);
+
+    if (fin < inicio) {
+        console.warn("Fecha de egreso inválida");
+        return;
+    }
+
+    // Lógica de resta de fechas
+    let anios = fin.getFullYear() - inicio.getFullYear();
+    let meses = fin.getMonth() - inicio.getMonth();
+    let dias = fin.getDate() - inicio.getDate();
+
+    if (dias < 0) {
+      meses--;
+      const ultimoDiaMesPasado = new Date(fin.getFullYear(), fin.getMonth(), 0).getDate();
+      dias += ultimoDiaMesPasado;
+    }
+
+    if (meses < 0) {
+      anios--;
+      meses += 12;
+    }
+
+    // Asignar valores y quitar opacidad
+    camposTiempo[0].value = anios.toString();
+    camposTiempo[1].value = meses.toString();
+    camposTiempo[2].value = dias.toString();
+    
+    /* camposTiempo.forEach(c => c?.classList.remove('opacity-50')); */
+  }
+
+  inputIngreso?.addEventListener('change', actualizarTiempoServicio);
+  inputEgreso?.addEventListener('change', actualizarTiempoServicio);
+</script>
 
 <script>
   import { personalSchema } from "@/lib/schemas/personal";
