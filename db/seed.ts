@@ -14,7 +14,7 @@ export default async function seed() {
   const hashedPassword = await bcrypt.hash(password, 10);
   const hashedTestPassword = await bcrypt.hash("test123", 10);
   
-  await db.delete(User);
+  //await db.delete(User);
 
   await db.insert(User).values([
     { 
@@ -26,10 +26,8 @@ export default async function seed() {
     { 
       id: "2", 
       username: "test", 
-      password: hashedTestPassword,
+      password: hashedTestPassword, //test123
       name: "Test User" 
     }
   ]);
-  const users = await db.select().from(User);
-  console.log('Usuarios existentes en la base de datos:', users);
 }
