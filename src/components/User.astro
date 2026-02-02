@@ -6,14 +6,14 @@ const name = user?.name || "Invitado";
 const initial = name.charAt(0).toUpperCase();
 ---
 
-<div class="flex items-center justify-center gap-2 fixed top-2 w-full h-26">
-    <div class="avatar avatar-online placeholder">
+<div class="flex items-center justify-center gap-2 w-full h-26">
+    <div class="avatar avatar-online placeholder animate-fade-in-right">
         <div class="bg-neutral text-neutral-content size-24 rounded-full flex justify-center items-center">
             <span class="text-5xl">{initial}</span>
         </div>
     </div>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col animate-fade-in-left">
       <p class="font-semibold text-2xl">¡Hola bienvenido {name}!</p>
       <div id="logout-button" class="btn mt-4 cursor-pointer">Cerrar sesión</div>
     </div>
