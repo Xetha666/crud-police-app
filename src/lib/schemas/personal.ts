@@ -23,10 +23,23 @@ export const personalSchema = z.object({
     sede_depincri: optionalField,
     area_oficina: optionalField,
     grado: optionalField,
-    apellidos_nombres: z.string()
-                            .min(1, "El nombre es obligatorio")
-                            .regex(/^[A-ZÑÁÉÍÓÚa-zñáéíóú\s]+ [A-ZÑÁÉÍÓÚa-zñáéíóú\s]+$/, {
-                                message: "Debe ingresar Apellidos y Nombres separados por un espacio"}),
+    apellidos_nombres: z.string({
+      required_error: "El campo es obligatorio",
+      invalid_type_error: "Debe ser un texto válido",
+    })
+    .trim()
+    .min(1, "Apellidos y nombres son obligatorios")
+    .refine(
+      (val) => {
+        if (!val) return false;
+        // Dividimos por espacios y filtramos elementos vacíos
+        const palabras = val.split(/\s+/).filter(Boolean);
+        return palabras.length >= 4;
+      },
+      {
+        message: "\nApellidoPaterno ApellidoMaterno, PrimerNombre SegundoNombre\n(mínimo 4 palabras)",
+      }
+    ),
     sexo: optionalField,
     distrito_nac: optionalField,
     provincia_nac: optionalField,
