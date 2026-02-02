@@ -13,14 +13,14 @@ const listOfWeapons = await db.select().from(Armamento);
 ---
 
 <div class="p-4">
-  <div class="overflow-x-auto rounded-box border border-white bg-base-200">
+  <div class="overflow-x-auto rounded-box border border-white bg-base-200 print:rounded-none">
     <table class="table table-lg w-full animate-blurred-fade-in">
 
       <thead class="select-none">
         <tr class="bg-base-200 text-center text-base *:border *:border-white">
           <th rowspan="5">#</th>
-          <th rowspan="5">ACCIONES</th>
-          <th rowspan="5">FOTO</th>
+          <th rowspan="5" class="print:hidden">ACCIONES</th>
+          <th rowspan="5" class="col-foto">FOTO</th>
           <th rowspan="5">
             <div class="flex flex-col items-center justify-center text-center">
             <span>SUB UNIDAD</span>
@@ -43,7 +43,7 @@ const listOfWeapons = await db.select().from(Armamento);
           </th>
           <th rowspan="5">GRADO</th>
           <th rowspan="5">APELLIDOS Y NOMBRES</th>
-          <th colspan="3">NATURALEZA</th>
+          <th colspan="3" class="col-naturaleza">NATURALEZA</th>
           <th rowspan="5">FECHA NACIMIEN.</th>
           <th rowspan="5">EDAD</th>
           <th rowspan="5">DNI</th>
@@ -74,9 +74,9 @@ const listOfWeapons = await db.select().from(Armamento);
         </tr>
 
         <tr class="bg-base-200 text-center *:border *:border-white">
-          <th rowspan="4">DISTRITO</th>
-          <th rowspan="4">PROVINCIA</th>
-          <th rowspan="4">DEPTO</th>
+          <th rowspan="4" class="col-naturaleza">DISTRITO</th>
+          <th rowspan="4" class="col-naturaleza">PROVINCIA</th>
+          <th rowspan="4" class="col-naturaleza">DEPTO</th>
           <th rowspan="4">AÑOS</th>
           <th rowspan="4">MESES</th>
           <th rowspan="4">DIAS</th>
@@ -177,14 +177,14 @@ const listOfWeapons = await db.select().from(Armamento);
           return (
             <tr class="hover:bg-base-300/50 transition-colors text-center text-xs *:border *:border-gray-500">
               <th>{index + 1}</th>
-              <td class="p-0">
+              <td class="print:hidden p-0">
                 <div class="inline-flex items-center justify-center gap-1 h-full w-full py-1">
                   <button value={p.id} class="btn btn-square text-2xl btn-info btn-xs btn-edit-personal" title="Editar">✏️</button>
                   <button value={p.id} name={p.apellidos_nombres} class="btn btn-square text-2xl btn-error btn-xs btn-delete-personal" title="Eliminar">🗑️</button>
                 </div>
               </td>
 
-              <td class="p-0">
+              <td class="col-foto p-0">
                 <div class="flex items-center justify-center h-full w-full">
                   <div class="avatar">
                     <div class="block">
@@ -215,9 +215,9 @@ const listOfWeapons = await db.select().from(Armamento);
               <td>{i.area_oficina}</td>
               <td>{p.grado}</td>
               <td class="font-bold uppercase">{p.apellidos_nombres}</td>
-              <td>{p.distrito_nac}</td>
-              <td>{p.provincia_nac}</td>
-              <td>{p.depto_nac}</td>
+              <td class="col-naturaleza">{p.distrito_nac}</td>
+              <td class="col-naturaleza">{p.provincia_nac}</td>
+              <td class="col-naturaleza">{p.depto_nac}</td>
               <td>{p.fecha_nac}</td>
               <td>{p.edad}</td>
               <td>{p.dni}</td>
