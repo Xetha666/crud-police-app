@@ -21,9 +21,26 @@ const listOfWeapons = await db.select().from(Armamento);
           <th rowspan="5">#</th>
           <th rowspan="5">ACCIONES</th>
           <th rowspan="5">FOTO</th>
-          <th rowspan="5">SUB UNIDAD y/o SITUACIÓN</th>
-          <th rowspan="5">SEDE DEPINCRI</th>
-          <th rowspan="5">AREA Y/U OFICINA</th>
+          <th rowspan="5">
+            <div class="flex flex-col items-center justify-center text-center">
+            <span>SUB UNIDAD</span>
+            <span>Y/O</span>
+            <span>SITUACIÓN</span>
+          </div>
+          </th>
+          <th rowspan="5">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>SEDE</span>
+              <span>DEPINCRI</span>
+            </div>
+          </th>
+          <th rowspan="5">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>AREA</span>
+              <span>Y/O</span>
+              <span>OFICINA</span>
+            </div>
+          </th>
           <th rowspan="5">GRADO</th>
           <th rowspan="5">APELLIDOS Y NOMBRES</th>
           <th colspan="3">NATURALEZA</th>
