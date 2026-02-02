@@ -2,8 +2,6 @@ import { db, User } from 'astro:db';
 import bcrypt from 'bcryptjs';
 import 'dotenv/config';
 
-
-
 export default async function seed() {
   const password = process.env.DB_USER_PASSWORD;
 
