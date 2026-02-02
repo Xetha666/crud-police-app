@@ -14,9 +14,9 @@ const listOfWeapons = await db.select().from(Armamento);
 
 <div class="p-4">
   <div class="overflow-x-auto rounded-box border border-white bg-base-200">
-    <table class="table table-lg w-full">
+    <table class="table table-lg w-full animate-blurred-fade-in">
 
-      <thead class="">
+      <thead class="select-none">
         <tr class="bg-base-200 text-center text-base *:border *:border-white">
           <th rowspan="5">#</th>
           <th rowspan="5">ACCIONES</th>
@@ -162,7 +162,6 @@ const listOfWeapons = await db.select().from(Armamento);
               <th>{index + 1}</th>
               <td class="p-0">
                 <div class="inline-flex items-center justify-center gap-1 h-full w-full py-1">
-                  <!--TODO: Falta hacer el Editar -->
                   <button value={p.id} class="btn btn-square text-2xl btn-info btn-xs btn-edit-personal" title="Editar">✏️</button>
                   <button value={p.id} name={p.apellidos_nombres} class="btn btn-square text-2xl btn-error btn-xs btn-delete-personal" title="Eliminar">🗑️</button>
                 </div>
@@ -172,14 +171,14 @@ const listOfWeapons = await db.select().from(Armamento);
                 <div class="flex items-center justify-center h-full w-full">
                   <div class="avatar">
                     <div class="block">
-                      <button class="cursor-pointer p-2 hover:scale-105 transition-transform flex items-center justify-center">
+                      <button class="cursor-pointer hover:scale-105 transition-transform p-3">
                         {p.foto !== "--" ? (
                           <a href={p.foto} title="Ver Foto Completa" target="_blank" rel="noopener noreferrer">
                             <img
                             id="preview_foto" 
                             src={p.foto} 
                             alt="Avatar" 
-                            class="w-10 rounded-xl" 
+                            class="w-full h-full rounded-xl" 
                           />
                           </a>
                         ) : (
