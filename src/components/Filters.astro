@@ -1,44 +1,125 @@
-  <div class="dropdown dropdown-bottom">
-    <div tabindex="0" role="button" class="btn btn-outline btn-primary">
-      👁️ Columnas Visibles
-    </div>
-    <ul tabindex="0" class="dropdown-content z-1 menu p-4 shadow bg-base-100 rounded-box w-64 border border-white/10">
-      <h3 class="font-bold mb-2 text-xs opacity-50 uppercase">Columnas</h3>
-      <li>
-        <label class="label cursor-pointer justify-start gap-3">
-          <input type="checkbox" checked class="checkbox checkbox-xs checkbox-primary col-toggle" data-column="col-naturaleza" />
-          <span class="label-text">Naturaleza</span>
-        </label>
-      </li>
-      <li>
-        <label class="label cursor-pointer justify-start gap-3">
-          <input type="checkbox" checked class="checkbox checkbox-xs checkbox-primary col-toggle" data-column="col-foto" />
-          <span class="label-text">Foto</span>
-        </label>
-      </li>
-    </ul>
-  </div>
+---
+// 1. Define un array de objetos con la configuración de tus columnas
+const columns = [
+  { id: "col-foto", label: "Foto" },
+  { id: "col-sub-unidad", label: "Sub Unidad" },
+  { id: "col-sede-depincri", label: "Sede Depincri" },
+  { id: "col-area-oficina", label: "Area Oficina" },
+  { id: "col-grado", label: "Grado" },
+  { id: "col-apellidos-nombres", label: "Apellidos y Nombres" },
+  { id: "col-naturaleza", label: "Naturaleza" },
+  { id: "col-fecha-nac", label: "Fecha de Nacimiento" },
+  { id: "col-edad", label: "Edad" },
+  { id: "col-dni", label: "DNI" },
+  { id: "col-codigo-dni", label: "Código DNI" },
+  { id: "col-ingreso-pnp", label: "Ingreso PNP" },
+  { id: "col-egreso-pnp", label: "Egreso PNP" },
+  { id: "col-tiempo-servicio", label: "Tiempo de Servicio" },
+  { id: "col-codigo-especialidad", label: "Código Especialidad" },
+  { id: "col-cip", label: "CIP" },
+  { id: "col-ultimo-ascenso", label: "Último Ascenso" },
+  { id: "col-incorp-divpol-chyo", label: "Incorp Divpol Chyo" },
+  { id: "col-grupo-sanguineo", label: "Grupo Sanguíneo" },
+  { id: "col-incorp-depincri", label: "Incorp Depincri" },
+  { id: "col-cargo", label: "Cargo" },
+  { id: "col-codigo-cargo", label: "Código Cargo" },
+  { id: "col-funcion-horario", label: "Función Horario" },
+  { id: "col-aptitud-psicosomatica", label: "Aptitud Psicosomática" },
+  { id: "col-procedencia", label: "Procedencia" },
+  { id: "col-incorp-depincri-calidad", label: "Incorp Depincri Calidad" },
+  { id: "col-arma-particular", label: "Arma Particular" },
+  { id: "col-arma-estado", label: "Arma Estado" },
+  { id: "col-lic-mayor", label: "Licencia Vehículo Mayor" },
+  { id: "col-lic-menor", label: "Licencia Vehículo Menor" },
+  {id: "col-ec", label: "EC"},
+  {id: "col-domicilio", label: "Domicilio"},
+  {id: "col-banco-de-la-nacion", label: "Banco de la Nación"},
+  {id: "col-correo-electronico", label: "Correo Electrónico" },
+  {id: "col-telefonos", label: "Teléfonos" },
+  {id: "col-cambiado-reasignado", label: "Cambiado y/o Reasignado" },
+];
+---
 
-  <button class="btn btn-secondary" onclick="window.print()">
-    🖨️ Imprimir Reporte
-  </button>
+<div class="dropdown dropdown-bottom">
+  <div tabindex="0" role="button" class="btn btn-outline btn-primary">
+    👁️ Ocultar Columnas
+  </div>
+  <ul tabindex="0" class="dropdown-content z-1 menu p-4 shadow bg-base-100 rounded-box w-64 border border-white/10">
+    <h3 class="font-bold mb-2 text-xs opacity-50 uppercase">Columnas</h3>
+    <div class="flex flex-col gap-2 max-h-60 overflow-y-auto">
+      {columns.map((col) => (
+        <li>
+          <label class="label cursor-pointer justify-start gap-3">
+            <input 
+              type="checkbox" 
+              checked 
+              class="checkbox checkbox-xs checkbox-primary col-toggle" 
+              data-column={col.id} 
+            />
+            <span class="label-text">{col.label}</span>
+          </label>
+        </li>
+      ))}
+    </div>
+  </ul>
+</div>
+
+<button class="btn btn-secondary" onclick="window.print()">
+  🖨️ Imprimir Reporte
+</button>
 
 <script>
   const toggles = document.querySelectorAll('.col-toggle');
+  
+  // Referencias Armamento
+  const headerArmaMain = document.querySelector('.col-armamento');
+  const headerPartGroup = document.querySelector('.col-armamento-part-group');
+  const headerEstGroup = document.querySelector('.col-armamento-est-group');
+
+  // Referencias Licencias
+  const headerLicMain = document.getElementById('header-licencias-main');
+  const headerLicMayorGroup = document.getElementById('group-lic-mayor');
+  const headerLicMenorGroup = document.getElementById('group-lic-menor');
 
   toggles.forEach(checkbox => {
     checkbox.addEventListener('change', (e) => {
       const target = e.target as HTMLInputElement;
       const columnClass = target.dataset.column;
-      const elements = document.querySelectorAll(`.${columnClass}`);
       
-      elements.forEach(el => {
-        if (target.checked) {
-          el.classList.remove('hidden');
-        } else {
-          el.classList.add('hidden');
-        }
-      });
+      // 1. Ocultar/Mostrar celdas base (td y th de nivel 3/4/5)
+      const elements = document.querySelectorAll(`.${columnClass}`);
+      elements.forEach(el => el.classList.toggle('hidden', !target.checked));
+
+      // 2. Actualizar SIEMPRE los colspans de los niveles superiores
+      actualizarHeaders();
     });
   });
+
+  function actualizarHeaders() {
+    // --- LÓGICA ARMAMENTO ---
+    const partArma = (document.querySelector('[data-column="col-arma-particular"]') as HTMLInputElement)?.checked;
+    const estArma = (document.querySelector('[data-column="col-arma-estado"]') as HTMLInputElement)?.checked;
+
+    if (headerPartGroup) headerPartGroup.classList.toggle('hidden', !partArma);
+    if (headerEstGroup) headerEstGroup.classList.toggle('hidden', !estArma);
+    
+    if (headerArmaMain) {
+      const totalArma = (partArma ? 12 : 0) + (estArma ? 12 : 0);
+      headerArmaMain.classList.toggle('hidden', totalArma === 0);
+      headerArmaMain.setAttribute('colspan', totalArma.toString());
+    }
+
+    // --- LÓGICA LICENCIAS ---
+    const mayorLic = (document.querySelector('[data-column="col-lic-mayor"]') as HTMLInputElement)?.checked;
+    const menorLic = (document.querySelector('[data-column="col-lic-menor"]') as HTMLInputElement)?.checked;
+
+    if (headerLicMayorGroup) headerLicMayorGroup.classList.toggle('hidden', !mayorLic);
+    if (headerLicMenorGroup) headerLicMenorGroup.classList.toggle('hidden', !menorLic);
+    
+    if (headerLicMain) {
+      const totalLic = (mayorLic ? 7 : 0) + (menorLic ? 7 : 0);
+      headerLicMain.classList.toggle('hidden', totalLic === 0);
+      headerLicMain.setAttribute('colspan', totalLic.toString());
+    }
+  }
 </script>
