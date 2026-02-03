@@ -21,150 +21,150 @@ const listOfWeapons = await db.select().from(Armamento);
           <th rowspan="5">#</th>
           <th rowspan="5" class="print:hidden">ACCIONES</th>
           <th rowspan="5" class="col-foto">FOTO</th>
-          <th rowspan="5">
+          <th rowspan="5" class="col-sub-unidad">
             <div class="flex flex-col items-center justify-center text-center">
             <span>SUB UNIDAD</span>
             <span>Y/O</span>
             <span>SITUACIÓN</span>
           </div>
           </th>
-          <th rowspan="5">
+          <th rowspan="5" class="col-sede-depincri">
             <div class="flex flex-col items-center justify-center text-center">
               <span>SEDE</span>
               <span>DEPINCRI</span>
             </div>
           </th>
-          <th rowspan="5">
+          <th rowspan="5" class="col-area-oficina">
             <div class="flex flex-col items-center justify-center text-center">
               <span>AREA</span>
               <span>Y/O</span>
               <span>OFICINA</span>
             </div>
           </th>
-          <th rowspan="5">GRADO</th>
-          <th rowspan="5">APELLIDOS Y NOMBRES</th>
+          <th rowspan="5" class="col-grado">GRADO</th>
+          <th rowspan="5" class="col-apellidos-nombres">APELLIDOS Y NOMBRES</th>
           <th colspan="3" class="col-naturaleza">NATURALEZA</th>
-          <th rowspan="5">FECHA NACIMIEN.</th>
-          <th rowspan="5">EDAD</th>
-          <th rowspan="5">DNI</th>
-          <th rowspan="5">CODIGO DNI</th>
-          <th rowspan="5">INGRESO PNP</th>
-          <th rowspan="5">EGRESO PNP</th>
-          <th colspan="3">TIEMPO DE SERVICIOS (Reales y Efectivos)</th>
-          <th rowspan="5">CODIGO y/o ESPECIALIDAD</th>
-          <th colspan="4">CARNET DE IDENTIDAD PERSONAL (CIP)</th>
-          <th rowspan="5">ULTIMO ASCENSO</th>
-          <th rowspan="5">INCORP. DIVPOL-CHYO</th>
-          <th rowspan="5">GRUPO SANG.</th>
-          <th rowspan="5">INCORP. DEPINCRI</th>
-          <th rowspan="5">CARGO</th>
-          <th rowspan="5">CODIGO CARGO</th>
-          <th rowspan="5">FUNCION Y HORARIO</th>
-          <th rowspan="5">APTITUD PSICOSOMATICA</th>
-          <th rowspan="5">PROCEDENCIA</th>
-          <th rowspan="5">SE INCORPORA AL DEPINCRI EN CALIDAD DE</th>
-          <th colspan="24">ARMAMENTO DE USO PARTICULAR Y/O DE EL ESTADO</th>
-          <th colspan="14">LICENCIA DE CONDUCIR</th>
-          <th rowspan="5">EC</th>
-          <th colspan="5">DOMICILIO</th>            
-          <th colspan="2">BANCO DE LA NACION</th>
-          <th colspan="3">CORREO ELECTRONICO</th>
-          <th colspan="6">TELEFONOS</th>
-          <th colspan="4">CAMBIADO Y/O REASIGNADO A OTRA SUB UNIDAD PNP</th>
+          <th rowspan="5" class="col-fecha-nac">FECHA NACIMIEN.</th>
+          <th rowspan="5" class="col-edad">EDAD</th>
+          <th rowspan="5" class="col-dni">DNI</th>
+          <th rowspan="5" class="col-codigo-dni">CODIGO DNI</th>
+          <th rowspan="5" class="col-ingreso-pnp">INGRESO PNP</th>
+          <th rowspan="5" class="col-egreso-pnp">EGRESO PNP</th>
+          <th colspan="3" class="col-tiempo-servicio">TIEMPO DE SERVICIOS (Reales y Efectivos)</th>
+          <th rowspan="5" class="col-codigo-especialidad">CODIGO y/o ESPECIALIDAD</th>
+          <th colspan="4" class="col-cip">CARNET DE IDENTIDAD PERSONAL (CIP)</th>
+          <th rowspan="5" class="col-ultimo-ascenso">ULTIMO ASCENSO</th>
+          <th rowspan="5" class="col-incorp-divpol-chyo">INCORP. DIVPOL-CHYO</th>
+          <th rowspan="5" class="col-grupo-sanguineo">GRUPO SANG.</th>
+          <th rowspan="5" class="col-incorp-depincri">INCORP. DEPINCRI</th>
+          <th rowspan="5" class="col-cargo">CARGO</th>
+          <th rowspan="5" class="col-codigo-cargo">CODIGO CARGO</th>
+          <th rowspan="5" class="col-funcion-horario">FUNCION Y HORARIO</th>
+          <th rowspan="5" class="col-aptitud-psicosomatica">APTITUD PSICOSOMATICA</th>
+          <th rowspan="5" class="col-procedencia">PROCEDENCIA</th>
+          <th rowspan="5" class="col-incorp-depincri-calidad">SE INCORPORA AL DEPINCRI EN CALIDAD DE</th>
+          <th colspan="24" class="col-armamento">ARMAMENTO DE USO PARTICULAR Y/O DE EL ESTADO</th>
+          <th colspan="14" class="col-licencia-conducir" id="header-licencias-main">LICENCIA DE CONDUCIR</th>
+          <th rowspan="5" class="col-ec">EC</th>
+          <th colspan="5" class="col-domicilio">DOMICILIO</th>            
+          <th colspan="2" class="col-banco-de-la-nacion">BANCO DE LA NACION</th>
+          <th colspan="3" class="col-correo-electronico">CORREO ELECTRONICO</th>
+          <th colspan="6" class="col-telefonos">TELEFONOS</th>
+          <th colspan="4" class="col-cambiado-reasignado">CAMBIADO Y/O REASIGNADO A OTRA SUB UNIDAD PNP</th>
         </tr>
 
         <tr class="bg-base-200 text-center *:border *:border-white">
           <th rowspan="4" class="col-naturaleza">DISTRITO</th>
           <th rowspan="4" class="col-naturaleza">PROVINCIA</th>
           <th rowspan="4" class="col-naturaleza">DEPTO</th>
-          <th rowspan="4">AÑOS</th>
-          <th rowspan="4">MESES</th>
-          <th rowspan="4">DIAS</th>
-          <th rowspan="4">ANTIGUO y/o CODOFÍN</th>
-          <th rowspan="4">CIP</th>
-          <th rowspan="4">SIT CIP</th>
-          <th rowspan="4">FECHA (Expedicion y/o Pérdida)</th>
-          <th colspan="12">PARTICULAR</th>            
-          <th colspan="12">ESTADO</th>
-          <th colspan="7">VEHICULO MAYOR (CAMIONETA Y/O AUTO)</th>            
-          <th colspan="7">VEHÍCULO MENOR (MOTOCICLETA)</th>            
-          <th rowspan="4">DIRRECION</th>
-          <th rowspan="4">REFERENCIA DOMICILIARIA</th>
-          <th rowspan="4">DISTRITO</th>
-          <th rowspan="4">PROVINCIA</th>
-          <th rowspan="4">DEPTO</th>
-          <th rowspan="4">N° CUENTA AHORROS</th>
-          <th rowspan="4">C.C.I</th>
-          <th colspan="2">PARTICULAR</th>
-          <th rowspan="4">INSTITUCIONAL</th>
-          <th rowspan="4">CASA</th>
-          <th colspan="5">CELULAR</th>
-          <th colspan="4">DOCUMENTO</th>
+          <th rowspan="4" class="col-tiempo-servicio">AÑOS</th>
+          <th rowspan="4" class="col-tiempo-servicio">MESES</th>
+          <th rowspan="4" class="col-tiempo-servicio">DIAS</th>
+          <th rowspan="4" class="col-cip">ANTIGUO y/o CODOFÍN</th>
+          <th rowspan="4" class="col-cip">CIP</th>
+          <th rowspan="4" class="col-cip">SIT CIP</th>
+          <th rowspan="4" class="col-cip">FECHA (Expedicion y/o Pérdida)</th>
+          <th colspan="12" class="col-armamento-part-group">PARTICULAR</th>            
+          <th colspan="12" class="col-armamento-est-group">ESTADO</th>
+          <th colspan="7" id="group-lic-mayor" class="col-lic-mayor-group">VEHICULO MAYOR (CAMIONETA Y/O AUTO)</th>            
+          <th colspan="7" id="group-lic-menor" class="col-lic-menor-group">VEHÍCULO MENOR (MOTOCICLETA)</th>            
+          <th rowspan="4" class="col-domicilio">DIRRECION</th>
+          <th rowspan="4" class="col-domicilio">REFERENCIA DOMICILIARIA</th>
+          <th rowspan="4" class="col-domicilio">DISTRITO</th>
+          <th rowspan="4" class="col-domicilio">PROVINCIA</th>
+          <th rowspan="4" class="col-domicilio">DEPTO</th>
+          <th rowspan="4" class="col-banco-de-la-nacion">N° CUENTA AHORROS</th>
+          <th rowspan="4" class="col-banco-de-la-nacion">C.C.I</th>
+          <th colspan="2" class="col-correo-electronico">PARTICULAR</th>
+          <th rowspan="4" class="col-correo-electronico">INSTITUCIONAL</th>
+          <th rowspan="4" class="col-telefonos">CASA</th>
+          <th colspan="5" class="col-telefonos">CELULAR</th>
+          <th colspan="4" class="col-cambiado-reasignado">DOCUMENTO</th>
 
         </tr>
 
         <tr class="bg-base-200 text-center *:border *:border-white">
-          <th rowspan="3">TIPO</th>
-          <th rowspan="3">MARCA</th>
-          <th rowspan="3">MODELO</th>
-          <th rowspan="3">CALIBRE</th>
-          <th rowspan="3">N° SERIE</th>
-          <th colspan="5">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
-          <th colspan="2">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
-          <th rowspan="3">TIPO</th>
-          <th rowspan="3">MARCA</th>
-          <th rowspan="3">MODELO</th>
-          <th rowspan="3">CALIBRE</th>
-          <th rowspan="3">N° SERIE</th>
-          <th colspan="5">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
-          <th colspan="2">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
-          <th rowspan="3">PARTICULAR</th>
-          <th rowspan="3">POLICIAL</th>
-          <th rowspan="3">MILITAR</th>
-          <th rowspan="3">CLASE</th>
-          <th rowspan="3">CATEGORIA</th>
-          <th rowspan="3">F.EXPED.</th>
-          <th rowspan="3">F.CADUC.</th>
-          <th rowspan="3">PARTICULAR</th>
-          <th rowspan="3">POLICIAL</th>
-          <th rowspan="3">MILITAR</th>
-          <th rowspan="3">CLASE</th>
-          <th rowspan="3">CATEGORIA</th>
-          <th rowspan="3">F.EXPED.</th>
-          <th rowspan="3">F.CADUC.</th>
-          <th rowspan="3">GMAIL</th>
-          <th rowspan="3">HOTMAIL</th>
-          <th rowspan="3">RPC</th>
-          <th rowspan="3">MOV-RPC</th>
-          <th rowspan="3">ENTEL</th>
-          <th rowspan="3">BITEL</th>
-          <th rowspan="3">WHATSAPP</th>
-          <th rowspan="3">TIPO</th>
-          <th rowspan="3">N°</th>
-          <th rowspan="3">PROCEDENCIA</th>
-          <th rowspan="3">FECHA</th>
+          <th rowspan="3" class="col-arma-particular">TIPO</th>
+          <th rowspan="3" class="col-arma-particular">MARCA</th>
+          <th rowspan="3" class="col-arma-particular">MODELO</th>
+          <th rowspan="3" class="col-arma-particular">CALIBRE</th>
+          <th rowspan="3" class="col-arma-particular">N° SERIE</th>
+          <th colspan="5" class="col-arma-particular">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
+          <th colspan="2" class="col-arma-particular">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
+          <th rowspan="3" class="col-arma-estado">TIPO</th>
+          <th rowspan="3" class="col-arma-estado">MARCA</th>
+          <th rowspan="3" class="col-arma-estado">MODELO</th>
+          <th rowspan="3" class="col-arma-estado">CALIBRE</th>
+          <th rowspan="3" class="col-arma-estado">N° SERIE</th>
+          <th colspan="5" class="col-arma-estado">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
+          <th colspan="2" class="col-arma-estado">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
+          <th rowspan="3" class="col-lic-mayor">PARTICULAR</th>
+          <th rowspan="3" class="col-lic-mayor">POLICIAL</th>
+          <th rowspan="3" class="col-lic-mayor">MILITAR</th>
+          <th rowspan="3" class="col-lic-mayor">CLASE</th>
+          <th rowspan="3" class="col-lic-mayor">CATEGORIA</th>
+          <th rowspan="3" class="col-lic-mayor">F.EXPED.</th>
+          <th rowspan="3" class="col-lic-mayor">F.CADUC.</th>
+          <th rowspan="3" class="col-lic-menor">PARTICULAR</th>
+          <th rowspan="3" class="col-lic-menor">POLICIAL</th>
+          <th rowspan="3" class="col-lic-menor">MILITAR</th>
+          <th rowspan="3" class="col-lic-menor">CLASE</th>
+          <th rowspan="3" class="col-lic-menor">CATEGORIA</th>
+          <th rowspan="3" class="col-lic-menor">F.EXPED.</th>
+          <th rowspan="3" class="col-lic-menor">F.CADUC.</th>
+          <th rowspan="3" class="col-correo-electronico">GMAIL</th>
+          <th rowspan="3" class="col-correo-electronico">HOTMAIL</th>
+          <th rowspan="3" class="col-telefonos">RPC</th>
+          <th rowspan="3" class="col-telefonos">MOV-RPC</th>
+          <th rowspan="3" class="col-telefonos">ENTEL</th>
+          <th rowspan="3" class="col-telefonos">BITEL</th>
+          <th rowspan="3" class="col-telefonos">WHATSAPP</th>
+          <th rowspan="3" class="col-cambiado-reasignado">TIPO</th>
+          <th rowspan="3" class="col-cambiado-reasignado">N°</th>
+          <th rowspan="3" class="col-cambiado-reasignado">PROCEDENCIA</th>
+          <th rowspan="3" class="col-cambiado-reasignado">FECHA</th>
         </tr>
 
         <tr class="bg-base-200 text-center *:border *:border-white">
-          <th rowspan="2">N° CAF</th>
-          <th colspan="2">FECHA</th>
-          <th rowspan="2">LIBRO</th>
-          <th rowspan="2">FOLIO</th>
-          <th rowspan="2">N°</th>
-          <th rowspan="2">FECHA EMISIÓN</th>
-          <th rowspan="2">N° CAF</th>
-          <th colspan="2">FECHA</th>
-          <th rowspan="2">LIBRO</th>
-          <th rowspan="2">FOLIO</th>
-          <th rowspan="2">N°</th>
-          <th rowspan="2">FECHA EMISIÓN</th>
+          <th rowspan="2" class="col-arma-particular">N° CAF</th>
+          <th colspan="2" class="col-arma-particular">FECHA</th>
+          <th rowspan="2" class="col-arma-particular">LIBRO</th>
+          <th rowspan="2" class="col-arma-particular">FOLIO</th>
+          <th rowspan="2" class="col-arma-particular">N°</th>
+          <th rowspan="2" class="col-arma-particular">FECHA EMISIÓN</th>
+          <th rowspan="2" class="col-arma-estado">N° CAF</th>
+          <th colspan="2" class="col-arma-estado">FECHA</th>
+          <th rowspan="2" class="col-arma-estado">LIBRO</th>
+          <th rowspan="2" class="col-arma-estado">FOLIO</th>
+          <th rowspan="2" class="col-arma-estado">N°</th>
+          <th rowspan="2" class="col-arma-estado">FECHA EMISIÓN</th>
         </tr>
 
         <tr class="bg-base-200 text-center *:border *:border-white">
-          <th>EXPEDIC.</th>
-          <th>CADUCA</th>
-          <th>EXPEDIC.</th>
-          <th>CADUCA</th>
+          <th class="col-arma-particular">EXPEDIC.</th>
+          <th class="col-arma-particular">CADUCA</th>
+          <th class="col-arma-estado">EXPEDIC.</th>
+          <th class="col-arma-estado">CADUCA</th>
         </tr>
       </thead>
 
@@ -210,119 +210,118 @@ const listOfWeapons = await db.select().from(Armamento);
               </td>
 
               {/* Datos Laborales e Identidad */}
-              <td>{i.sub_unidad_situacion}</td>
-              <td>{i.sede_depincri}</td>
-              <td>{i.area_oficina}</td>
-              <td>{p.grado}</td>
-              <td class="font-bold uppercase">{p.apellidos_nombres}</td>
+              <td class="col-sub-unidad">{i.sub_unidad_situacion}</td>
+              <td class="col-sede-depincri">{i.sede_depincri}</td>
+              <td class="col-area-oficina">{i.area_oficina}</td>
+              <td class="col-grado">{p.grado}</td>
+              <td class=" col-apellidos-nombres font-bold uppercase">{p.apellidos_nombres}</td>
               <td class="col-naturaleza">{p.distrito_nac}</td>
               <td class="col-naturaleza">{p.provincia_nac}</td>
               <td class="col-naturaleza">{p.depto_nac}</td>
-              <td>{p.fecha_nac}</td>
-              <td>{p.edad}</td>
-              <td>{p.dni}</td>
-              <td>{p.codigo_dni}</td>
-              <td>{i.ingreso_pnp}</td>
-              <td>{i.egreso_pnp}</td>
-              <td>{i.tiempo_servicio_anios}</td>
-              <td>{i.tiempo_servicio_meses}</td>
-              <td>{i.tiempo_servicio_dias}</td>
-              <td>{i.codigo_especialidad}</td>
-
+              <td class="col-fecha-nac">{p.fecha_nac}</td>
+              <td class="col-edad">{p.edad}</td>
+              <td class="col-dni">{p.dni}</td>
+              <td class="col-codigo-dni">{p.codigo_dni}</td>
+              <td class="col-ingreso-pnp">{i.ingreso_pnp}</td>
+              <td class="col-egreso-pnp">{i.egreso_pnp}</td>
+              <td class="col-tiempo-servicio">{i.tiempo_servicio_anios}</td>
+              <td class="col-tiempo-servicio">{i.tiempo_servicio_meses}</td>
+              <td class="col-tiempo-servicio">{i.tiempo_servicio_dias}</td>
+              <td class="col-codigo-especialidad">{i.codigo_especialidad}</td>
               {/* CIP */}
-              <td>{i.cip_antiguo_codofin}</td>
-              <td>{i.cip_numero}</td>
-              <td>{i.cip_situacion}</td>
-              <td>{i.cip_fecha_expedicion}</td>
+              <td class="col-cip">{i.cip_antiguo_codofin}</td>
+              <td class="col-cip">{i.cip_numero}</td>
+              <td class="col-cip">{i.cip_situacion}</td>
+              <td class="col-cip">{i.cip_fecha_expedicion}</td>
 
               {/* Mas Datos Laborales */}
-              <td>{i.ultimo_ascenso}</td>
-              <td>{i.incorp_divpol_chyo}</td>
-              <td>{i.grupo_sanguineo}</td>
-              <td>{i.incorp_depincri}</td>
-              <td>{i.cargo}</td>
-              <td>{i.codigo_cargo}</td>
-              <td>{i.funcion_horario}</td>
-              <td>{i.aptitud_psicosomatica}</td>
-              <td>{i.procedencia}</td>
-              <td>{i.calidad_incorporacion}</td>
+              <td class="col-ultimo-ascenso">{i.ultimo_ascenso}</td>
+              <td class="col-incorp-divpol-chyo">{i.incorp_divpol_chyo}</td>
+              <td class="col-grupo-sanguineo">{i.grupo_sanguineo}</td>
+              <td class="col-incorp-depincri">{i.incorp_depincri}</td>
+              <td class="col-cargo">{i.cargo}</td>
+              <td class="col-codigo-cargo">{i.codigo_cargo}</td>
+              <td class="col-funcion-horario">{i.funcion_horario}</td>
+              <td class="col-aptitud-psicosomatica">{i.aptitud_psicosomatica}</td>
+              <td class="col-procedencia">{i.procedencia}</td>
+              <td class="col-incorp-depincri-calidad">{i.calidad_incorporacion}</td>
 
               {/* ARMAMENTO PARTICULAR (12 columnas) */}
-              <td>{weaponPart?.tipo_arma || "--"}</td>
-              <td>{weaponPart?.marca || "--"}</td>
-              <td>{weaponPart?.modelo || "--"}</td>
-              <td>{weaponPart?.calibre || "--"}</td>
-              <td>{weaponPart?.serie || "--"}</td>
-              <td>{weaponPart?.caf_num || "--"}</td>
-              <td>{weaponPart?.caf_exped || "--"}</td>
-              <td>{weaponPart?.caf_caduca || "--"}</td>
-              <td>{weaponPart?.caf_libro || "--"}</td>
-              <td>{weaponPart?.caf_folio || "--"}</td>
-              <td>{weaponPart?.tarjeta_num || "--"}</td>
-              <td>{weaponPart?.tarjeta_emision || "--"}</td>
+              <td class="col-arma-particular">{weaponPart?.tipo_arma}</td>
+              <td class="col-arma-particular">{weaponPart?.marca}</td>
+              <td class="col-arma-particular">{weaponPart?.modelo}</td>
+              <td class="col-arma-particular">{weaponPart?.calibre}</td>
+              <td class="col-arma-particular">{weaponPart?.serie}</td>
+              <td class="col-arma-particular">{weaponPart?.caf_num}</td>
+              <td class="col-arma-particular">{weaponPart?.caf_exped}</td>
+              <td class="col-arma-particular">{weaponPart?.caf_caduca}</td>
+              <td class="col-arma-particular">{weaponPart?.caf_libro}</td>
+              <td class="col-arma-particular">{weaponPart?.caf_folio}</td>
+              <td class="col-arma-particular">{weaponPart?.tarjeta_num}</td>
+              <td class="col-arma-particular">{weaponPart?.tarjeta_emision}</td>
 
               {/* ARMAMENTO ESTADO (12 columnas) */}
-              <td>{weaponEst?.tipo_arma || "--"}</td>
-              <td>{weaponEst?.marca || "--"}</td>
-              <td>{weaponEst?.modelo || "--"}</td>
-              <td>{weaponEst?.calibre || "--"}</td>
-              <td>{weaponEst?.serie || "--"}</td>
-              <td>{weaponEst?.caf_num || "--"}</td>
-              <td>{weaponEst?.caf_exped || "--"}</td>
-              <td>{weaponEst?.caf_caduca || "--"}</td>
-              <td>{weaponEst?.caf_libro || "--"}</td>
-              <td>{weaponEst?.caf_folio || "--"}</td>
-              <td>{weaponEst?.tarjeta_num || "--"}</td>
-              <td>{weaponEst?.tarjeta_emision || "--"}</td>
+              <td class="col-arma-estado">{weaponEst?.tipo_arma}</td>
+              <td class="col-arma-estado">{weaponEst?.marca}</td>
+              <td class="col-arma-estado">{weaponEst?.modelo}</td>
+              <td class="col-arma-estado">{weaponEst?.calibre}</td>
+              <td class="col-arma-estado">{weaponEst?.serie}</td>
+              <td class="col-arma-estado">{weaponEst?.caf_num}</td>
+              <td class="col-arma-estado">{weaponEst?.caf_exped}</td>
+              <td class="col-arma-estado">{weaponEst?.caf_caduca}</td>
+              <td class="col-arma-estado">{weaponEst?.caf_libro}</td>
+              <td class="col-arma-estado">{weaponEst?.caf_folio}</td>
+              <td class="col-arma-estado">{weaponEst?.tarjeta_num}</td>
+              <td class="col-arma-estado">{weaponEst?.tarjeta_emision}</td>
 
               {/* LICENCIAS (Vehículo Mayor) */}
-              <td>{v.lic_mayor_particular}</td>
-              <td>{v.lic_mayor_policial}</td>
-              <td>{v.lic_mayor_militar}</td>
-              <td>{v.lic_mayor_clase}</td>
-              <td>{v.lic_mayor_categoria}</td>
-              <td>{v.lic_mayor_f_exped}</td>
-              <td>{v.lic_mayor_f_caduc}</td>
+              <td class="col-lic-mayor">{v.lic_mayor_particular}</td>
+              <td class="col-lic-mayor">{v.lic_mayor_policial}</td>
+              <td class="col-lic-mayor">{v.lic_mayor_militar}</td>
+              <td class="col-lic-mayor">{v.lic_mayor_clase}</td>
+              <td class="col-lic-mayor">{v.lic_mayor_categoria}</td>
+              <td class="col-lic-mayor">{v.lic_mayor_f_exped}</td>
+              <td class="col-lic-mayor">{v.lic_mayor_f_caduc}</td>
 
               {/* LICENCIAS (Vehículo Menor) */}
-              <td>{v.lic_menor_particular}</td>
-              <td>{v.lic_menor_policial}</td>
-              <td>{v.lic_menor_militar}</td>
-              <td>{v.lic_menor_clase}</td>
-              <td>{v.lic_menor_categoria}</td>
-              <td>{v.lic_menor_f_exped}</td>
-              <td>{v.lic_menor_f_caduc}</td>
+              <td class="col-lic-menor">{v.lic_menor_particular}</td>
+              <td class="col-lic-menor">{v.lic_menor_policial}</td>
+              <td class="col-lic-menor">{v.lic_menor_militar}</td>
+              <td class="col-lic-menor">{v.lic_menor_clase}</td>
+              <td class="col-lic-menor">{v.lic_menor_categoria}</td>
+              <td class="col-lic-menor">{v.lic_menor_f_exped}</td>
+              <td class="col-lic-menor">{v.lic_menor_f_caduc}</td>
 
               {/* ESTADO CIVIL Y DOMICILIO */}
-              <td>{v.estado_civil}</td>
-              <td>{v.direccion}</td>
-              <td>{v.referencia_domiciliaria}</td>
-              <td>{v.distrito_dom}</td>
-              <td>{v.provincia_dom}</td>
-              <td>{v.depto_dom}</td>
+              <td class="col-ec">{v.estado_civil}</td>
+              <td class="col-domicilio">{v.direccion}</td>
+              <td class="col-domicilio">{v.referencia_domiciliaria}</td>
+              <td class="col-domicilio">{v.distrito_dom}</td>
+              <td class="col-domicilio">{v.provincia_dom}</td>
+              <td class="col-domicilio">{v.depto_dom}</td>
 
               {/* BANCO DE LA NACIÓN */}
-              <td>{v.bn_cuenta_corriente}</td>
-              <td>{v.bn_cci}</td>
+              <td class="col-banco-de-la-nacion">{v.bn_cuenta_corriente}</td>
+              <td class="col-banco-de-la-nacion">{v.bn_cci}</td>
 
               {/* CORREOS */}
-              <td>{v.email_gmail}</td>
-              <td>{v.email_hotmail}</td>
-              <td>{v.email_institucional}</td>
+              <td class="col-correo-electronico">{v.email_gmail}</td>
+              <td class="col-correo-electronico">{v.email_hotmail}</td>
+              <td class="col-correo-electronico">{v.email_institucional}</td>
 
               {/* TELÉFONOS */}
-              <td>{v.telf_casa}</td>
-              <td>{v.telf_rpc}</td>
-              <td>{v.telf_rpm}</td>
-              <td>{v.telf_entel}</td>
-              <td>{v.telf_bitel}</td>
-              <td>{v.telf_wsp}</td>
+              <td class="col-telefonos">{v.telf_casa}</td>
+              <td class="col-telefonos">{v.telf_rpc}</td>
+              <td class="col-telefonos">{v.telf_rpm}</td>
+              <td class="col-telefonos">{v.telf_entel}</td>
+              <td class="col-telefonos">{v.telf_bitel}</td>
+              <td class="col-telefonos">{v.telf_wsp}</td>
 
               {/* REASIGNACIÓN */}
-              <td>{v.reasig_tipo_doc}</td>
-              <td>{v.reasig_num}</td>
-              <td>{v.reasig_procedencia}</td>
-              <td>{v.reasig_fecha}</td>
+              <td class="col-cambiado-reasignado">{v.reasig_tipo_doc}</td>
+              <td class="col-cambiado-reasignado">{v.reasig_num}</td>
+              <td class="col-cambiado-reasignado">{v.reasig_procedencia}</td>
+              <td class="col-cambiado-reasignado">{v.reasig_fecha}</td>
             </tr>
           );
           
