@@ -1,6 +1,6 @@
 ---
 import Filters from "@/components/Filters.astro";
-import AddIcon from "/public/svg/add-icon.svg";
+import AddIcon from "/public/svg/add.svg";
 ---
 
 <div class="p-4">
@@ -1009,7 +1009,6 @@ import AddIcon from "/public/svg/add-icon.svg";
         method: method,
         body: formData,
       });
-      console.log("Datos del Formulario en Frontend", formData)
       if (response.ok) {
         alert(
           mode === "edit"
@@ -1041,7 +1040,6 @@ import AddIcon from "/public/svg/add-icon.svg";
   try {
     const response = await fetch(`/api/personal/${id}`);
     const data = await response.json();
-    console.log("Datos recibidos armas para edición:", data.weapons);
 
     const fill = (obj: any) => {
       if (!obj) return;
@@ -1057,6 +1055,57 @@ import AddIcon from "/public/svg/add-icon.svg";
     fill(data.Personal);
     fill(data.InfoPNP);
     fill(data.VidaSocial);
+    // --- LÓGICA ESPECÍFICA PARA ARMAS ---
+      if (data.weapons && Array.isArray(data.weapons)) {
+        // Buscamos el arma particular (tipo 'PARTICULAR' o según cómo lo guardes en DB)
+        const armaPart = data.weapons.find((w: any) => w.tipo_procedencia === 'PARTICULAR');
+        if (armaPart) {
+          // Mapeamos cada propiedad al input correspondiente usando el prefijo 'arma_part_'
+          const camposPart = {
+            tipo_arma: 'arma_part_tipo',
+            marca: 'arma_part_marca',
+            modelo: 'arma_part_modelo',
+            calibre: 'arma_part_calibre',
+            serie: 'arma_part_serie',
+            caf_num: 'arma_part_caf_num',
+            caf_exped: 'arma_part_caf_exped',
+            caf_caduca: 'arma_part_caf_caduca',
+            caf_libro: 'arma_part_caf_libro',
+            caf_folio: 'arma_part_caf_folio',
+            tarjeta_num: 'arma_part_tarjeta_num',
+            tarjeta_emision: 'arma_part_tarjeta_emision'
+          };
+
+          Object.entries(camposPart).forEach(([key, inputName]) => {
+            const input = form.querySelector(`[name="${inputName}"]`) as HTMLInputElement | HTMLSelectElement;
+            if (input) input.value = armaPart[key] || "";
+          });
+        }
+
+        // Buscamos el arma del estado (tipo 'ESTADO')
+        const armaEst = data.weapons.find((w: any) => w.tipo_procedencia === 'ESTADO');
+        if (armaEst) {
+          const camposEst = {
+            tipo_arma: 'arma_est_tipo',
+            marca: 'arma_est_marca',
+            modelo: 'arma_est_modelo',
+            calibre: 'arma_est_calibre',
+            serie: 'arma_est_serie',
+            caf_num: 'arma_est_caf_num',
+            caf_exped: 'arma_est_caf_exped',
+            caf_caduca: 'arma_est_caf_caduca',
+            caf_libro: 'arma_est_caf_libro',
+            caf_folio: 'arma_est_caf_folio',
+            tarjeta_num: 'arma_est_tarjeta_num',
+            tarjeta_emision: 'arma_est_tarjeta_emision'
+          };
+
+          Object.entries(camposEst).forEach(([key, inputName]) => {
+            const input = form.querySelector(`[name="${inputName}"]`) as HTMLInputElement | HTMLSelectElement;
+            if (input) input.value = armaEst[key] || "";
+          });
+        }
+      }
 
     // Lógica de la foto
     if (modalPreview) {
