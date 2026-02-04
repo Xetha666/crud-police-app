@@ -7,6 +7,7 @@ const columns = [
   { id: "col-area-oficina", label: "Area Oficina" },
   { id: "col-grado", label: "Grado" },
   { id: "col-apellidos-nombres", label: "Apellidos y Nombres" },
+  { id: "col-sexo", label: "Género" },
   { id: "col-naturaleza", label: "Naturaleza" },
   { id: "col-fecha-nac", label: "Fecha de Nacimiento" },
   { id: "col-edad", label: "Edad" },
@@ -41,7 +42,7 @@ const columns = [
 ---
 
 <div class="dropdown dropdown-bottom">
-  <div tabindex="0" role="button" class="btn btn-outline btn-primary">
+  <div tabindex="0" role="button" class="btn btn-outline btn-primary px-3">
     👁️ Ocultar Columnas
   </div>
   <ul tabindex="0" class="dropdown-content z-1 menu p-4 shadow bg-base-100 rounded-box w-64 border border-white/10">
@@ -64,7 +65,7 @@ const columns = [
   </ul>
 </div>
 
-<button class="btn btn-secondary" onclick="window.print()">
+<button class="btn btn-secondary px-3" onclick="window.print()">
   🖨️ Imprimir Reporte
 </button>
 
