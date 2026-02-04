@@ -1,9 +1,7 @@
 ---
 import { Armamento, db, eq, InfoPNP, Personal, VidaSocial} from 'astro:db';
-import DATA_ARMAMENTO from "@/data/armamento.json"
 
 // Realizamos el JOIN para traer Identidad, Info Laboral y Vida Social
-// El armamento lo manejaremos aparte por ser 1:N
 const allPersonal = await db.select()
   .from(Personal)
   .innerJoin(InfoPNP, eq(Personal.id, InfoPNP.personal_id))
@@ -11,9 +9,6 @@ const allPersonal = await db.select()
 
 // Traemos todo el armamento para mapearlo después
 const listOfWeapons = await db.select().from(Armamento);
-
-console.log('Personal', allPersonal);
-console.log('Armamento', listOfWeapons);
 ---
 
 <div class="p-4">
