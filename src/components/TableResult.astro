@@ -90,20 +90,47 @@ const listOfWeapons = await db.select().from(Armamento);
               <span>ASCENSO</span>
             </div>
           </th>
-          <th rowspan="5" class="col-incorp-divpol-chyo">INCORP. DIVPOL-CHYO</th>
-          <th rowspan="5" class="col-grupo-sanguineo">GRUPO SANG.</th>
-          <th rowspan="5" class="col-incorp-depincri">INCORP. DEPINCRI</th>
+          <th rowspan="5" class="col-incorp-divpol-chyo">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>INCORP.</span>
+              <span>DIVPOL</span>
+              <span>CHYO</span>
+            </div>
+          </th>
+          <th rowspan="5" class="col-grupo-sanguineo">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>GRUPO</span>
+              <span>SANG.</span>
+            </div>
+          </th>
+          <th rowspan="5" class="col-incorp-depincri">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>INCORP.</span>
+              <span>DEPINCRI</span>
+            </div>
+          </th>
           <th rowspan="5" class="col-cargo">CARGO</th>
-          <th rowspan="5" class="col-codigo-cargo">CODIGO CARGO</th>
+          <th rowspan="5" class="col-codigo-cargo">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>CODIGO</span>
+              <span>CARGO</span>
+            </div>
+          </th>
           <th rowspan="5" class="col-funcion-horario">FUNCION Y HORARIO</th>
           <th rowspan="5" class="col-aptitud-psicosomatica">
             <div class="flex flex-col items-center justify-center text-center">
               <span>APTITUD</span>
-              <span>PSICOSOMÁTICA</span>
+              <span>PSICOSOM.</span>
             </div>
           </th>
           <th rowspan="5" class="col-procedencia">PROCEDENCIA</th>
-          <th rowspan="5" class="col-incorp-depincri-calidad">SE INCORPORA AL DEPINCRI EN CALIDAD DE</th>
+          <th rowspan="5" class="col-incorp-depincri-calidad">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>SE INCORPORA</span>
+              <span>AL DEPINCRI</span>
+              <span>EN CALIDAD DE</span>
+            </div>
+          </th>
           <th colspan="24" class="col-armamento">ARMAMENTO DE USO PARTICULAR Y/O DE EL ESTADO</th>
           <th colspan="14" class="col-licencia-conducir" id="header-licencias-main">LICENCIA DE CONDUCIR</th>
           <th rowspan="5" class="col-ec">EC</th>
@@ -164,14 +191,24 @@ const listOfWeapons = await db.select().from(Armamento);
           <th rowspan="3" class="col-arma-particular">CALIBRE</th>
           <th rowspan="3" class="col-arma-particular">N° SERIE</th>
           <th colspan="5" class="col-arma-particular">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
-          <th colspan="2" class="col-arma-particular">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
+          <th colspan="2" class="col-arma-particular">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>TARJETA DE PROPIEDAD</span>
+              <span>ARMA DE FUEGO</span>
+            </div>
+          </th>
           <th rowspan="3" class="col-arma-estado">TIPO</th>
           <th rowspan="3" class="col-arma-estado">MARCA</th>
           <th rowspan="3" class="col-arma-estado">MODELO</th>
           <th rowspan="3" class="col-arma-estado">CALIBRE</th>
           <th rowspan="3" class="col-arma-estado">N° SERIE</th>
           <th colspan="5" class="col-arma-estado">CERTIFICADO DE ARMA DE FUEGO (CAF)</th>
-          <th colspan="2" class="col-arma-estado">TARJETA DE PROPIEDAD ARMA DE FUEGO</th>
+          <th colspan="2" class="col-arma-estado">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>TARJETA DE PROPIEDAD</span>
+              <span>ARMA DE FUEGO</span>
+            </div>
+          </th>
           <th rowspan="3" class="col-lic-mayor">PARTICULAR</th>
           <th rowspan="3" class="col-lic-mayor">POLICIAL</th>
           <th rowspan="3" class="col-lic-mayor">MILITAR</th>
