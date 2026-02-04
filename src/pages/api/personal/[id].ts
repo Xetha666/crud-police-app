@@ -138,14 +138,8 @@ export const PUT: APIRoute = async ({ params, request }) => {
       })
       .where(eq(VidaSocial.personal_id, id));
     
-      // Log para ver qué datos están llegando del formulario antes de procesar
-      console.log("Datos recibidos para armas:", {
-        particular: data.arma_part_tipo,
-        estado: data.arma_est_tipo,
-        id_personal: id
-      });
-    try{
-    const resPart = await db.update(Armamento)
+
+    await db.update(Armamento)
       .set({
         tipo_arma: String(data.arma_part_tipo || ""),
         marca: String(data.arma_part_marca || ""),
@@ -164,9 +158,10 @@ export const PUT: APIRoute = async ({ params, request }) => {
         eq(Armamento.personal_id, id),
         eq(Armamento.tipo_procedencia, 'PARTICULAR')
       ));
-      console.log("Resultado update Particular:", resPart);
+
+
     // Actualizar Arma del Estado
-    const resEst =await db.update(Armamento)
+    await db.update(Armamento)
       .set({
         tipo_arma: String(data.arma_est_tipo || ""),
         marca: String(data.arma_est_marca || ""),
@@ -185,12 +180,6 @@ export const PUT: APIRoute = async ({ params, request }) => {
         eq(Armamento.personal_id, id),
         eq(Armamento.tipo_procedencia, 'ESTADO')
       ));
-
-      console.log("Resultado update Estado:", resEst);
-
-      } catch (e) {
-  console.error("Error específico actualizando armas:", e);
-}
 
     return new Response(JSON.stringify({ message: "Éxito" }), { status: 200 });
 
