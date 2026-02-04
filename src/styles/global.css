@@ -9,13 +9,32 @@
 }
 
  @media print {
-  th, td {
-    border: 1px solid black;
-    color : black;
+
+  :root {
+        color-scheme: light !important; 
+    }
+ 
+  html, body, main, section, article, tbody, tbody tr, td,tbody{
+    background-color: white !important;
+    background-image: none !important;
+    box-shadow: none !important;
   }
-  thead tr th{
-    border: 1px solid black;
-    color : black;
+
+  .table-zebra tbody tr:nth-child(even),
+  .table-zebra tbody tr:nth-child(odd) {
+    background-color: white !important;
+  }
+
+  .overflow-x-auto, .bg-base-200 {
+    background-color: white !important;
+  }
+  body::before,
+  body::after {
+    display: none !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   table {
     border-radius: initial;
@@ -23,11 +42,30 @@
     width: 100%;
     table-layout: auto;
     color: black;
-    background: white;
   }
 
+   tbody tr{
+    font-size: 8px;
+    padding: 2px 4px;
+  }
+
+  thead tr th{
+    border: 1px solid black;
+    color : black;
+    background-color: rgb(205, 237, 255);
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+
+  th, td {
+    border: 1px solid black;
+    color : black;
+    padding: 2px 4px;
+  }
+  
+
   /* Ocultamos botones, barra de búsqueda y navegación al imprimir */
-  .btn, .nav, .sidebar, .filtros-container {
+  .btn, .nav, .sidebar, .filtros-container, .arrow-left, .line {
     display: none !important;
   }
 } 
