@@ -1,5 +1,6 @@
 ---
 import { Armamento, db, eq, InfoPNP, Personal, VidaSocial} from 'astro:db';
+import DATA_ARMAMENTO from "@/data/armamento.json"
 
 // Realizamos el JOIN para traer Identidad, Info Laboral y Vida Social
 // El armamento lo manejaremos aparte por ser 1:N
@@ -10,6 +11,9 @@ const allPersonal = await db.select()
 
 // Traemos todo el armamento para mapearlo después
 const listOfWeapons = await db.select().from(Armamento);
+
+console.log('Personal', allPersonal);
+console.log('Armamento', listOfWeapons);
 ---
 
 <div class="p-4">
@@ -43,24 +47,66 @@ const listOfWeapons = await db.select().from(Armamento);
           </th>
           <th rowspan="5" class="col-grado">GRADO</th>
           <th rowspan="5" class="col-apellidos-nombres">APELLIDOS Y NOMBRES</th>
+          <th rowspan="5" class="col-sexo">SEXO</th>
           <th colspan="3" class="col-naturaleza">NATURALEZA</th>
-          <th rowspan="5" class="col-fecha-nac">FECHA NACIMIEN.</th>
+          <th rowspan="5" class="col-fecha-nac">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>FECHA</span>
+              <span>NACIMIENTO</span>
+            </div>
+          </th>
           <th rowspan="5" class="col-edad">EDAD</th>
           <th rowspan="5" class="col-dni">DNI</th>
-          <th rowspan="5" class="col-codigo-dni">CODIGO DNI</th>
-          <th rowspan="5" class="col-ingreso-pnp">INGRESO PNP</th>
-          <th rowspan="5" class="col-egreso-pnp">EGRESO PNP</th>
-          <th colspan="3" class="col-tiempo-servicio">TIEMPO DE SERVICIOS (Reales y Efectivos)</th>
-          <th rowspan="5" class="col-codigo-especialidad">CODIGO y/o ESPECIALIDAD</th>
+          <th rowspan="5" class="col-codigo-dni">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>CÓDIGO</span>
+              <span>DNI</span>
+            </div>
+          </th>
+          <th rowspan="5" class="col-ingreso-pnp">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>INGRESO</span>
+              <span>PNP</span>
+            </div>
+          </th>
+          <th rowspan="5" class="col-egreso-pnp">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>EGRESO</span>
+              <span>PNP</span>
+            </div>
+          </th>
+          <th colspan="3" class="col-tiempo-servicio">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>TIEMPO DE SERVICIO</span>
+              <span>(Reales y Efectivos)</span>
+            </div>
+          </th>
+          <th rowspan="5" class="col-codigo-especialidad">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>CODIGO</span>
+              <span>Y/O</span>
+              <span>ESPECIALIDAD</span>
+            </div>
+          </th>
           <th colspan="4" class="col-cip">CARNET DE IDENTIDAD PERSONAL (CIP)</th>
-          <th rowspan="5" class="col-ultimo-ascenso">ULTIMO ASCENSO</th>
+          <th rowspan="5" class="col-ultimo-ascenso">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>ÚLTIMO</span>
+              <span>ASCENSO</span>
+            </div>
+          </th>
           <th rowspan="5" class="col-incorp-divpol-chyo">INCORP. DIVPOL-CHYO</th>
           <th rowspan="5" class="col-grupo-sanguineo">GRUPO SANG.</th>
           <th rowspan="5" class="col-incorp-depincri">INCORP. DEPINCRI</th>
           <th rowspan="5" class="col-cargo">CARGO</th>
           <th rowspan="5" class="col-codigo-cargo">CODIGO CARGO</th>
           <th rowspan="5" class="col-funcion-horario">FUNCION Y HORARIO</th>
-          <th rowspan="5" class="col-aptitud-psicosomatica">APTITUD PSICOSOMATICA</th>
+          <th rowspan="5" class="col-aptitud-psicosomatica">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>APTITUD</span>
+              <span>PSICOSOMÁTICA</span>
+            </div>
+          </th>
           <th rowspan="5" class="col-procedencia">PROCEDENCIA</th>
           <th rowspan="5" class="col-incorp-depincri-calidad">SE INCORPORA AL DEPINCRI EN CALIDAD DE</th>
           <th colspan="24" class="col-armamento">ARMAMENTO DE USO PARTICULAR Y/O DE EL ESTADO</th>
@@ -73,17 +119,30 @@ const listOfWeapons = await db.select().from(Armamento);
           <th colspan="4" class="col-cambiado-reasignado">CAMBIADO Y/O REASIGNADO A OTRA SUB UNIDAD PNP</th>
         </tr>
 
-        <tr class="bg-base-200 text-center *:border *:border-white">
+        <tr class="bg-base-200 text-center *:border *:border-white print:text-title">
           <th rowspan="4" class="col-naturaleza">DISTRITO</th>
           <th rowspan="4" class="col-naturaleza">PROVINCIA</th>
           <th rowspan="4" class="col-naturaleza">DEPTO</th>
           <th rowspan="4" class="col-tiempo-servicio">AÑOS</th>
           <th rowspan="4" class="col-tiempo-servicio">MESES</th>
           <th rowspan="4" class="col-tiempo-servicio">DIAS</th>
-          <th rowspan="4" class="col-cip">ANTIGUO y/o CODOFÍN</th>
+          <th rowspan="4" class="col-cip">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>ANTIGUO</span>
+              <span>Y/O</span>
+              <span>CODOFÍN</span>
+            </div>
+          </th>
           <th rowspan="4" class="col-cip">CIP</th>
           <th rowspan="4" class="col-cip">SIT CIP</th>
-          <th rowspan="4" class="col-cip">FECHA (Expedicion y/o Pérdida)</th>
+          <th rowspan="4" class="col-cip">
+            <div class="flex flex-col items-center justify-center text-center">
+              <span>FECHA</span>
+              <span>(Expedición</span>
+              <span>y/o</span>
+              <span>Perdida)</span>
+            </div>
+          </th>
           <th colspan="12" class="col-armamento-part-group">PARTICULAR</th>            
           <th colspan="12" class="col-armamento-est-group">ESTADO</th>
           <th colspan="7" id="group-lic-mayor" class="col-lic-mayor-group">VEHICULO MAYOR (CAMIONETA Y/O AUTO)</th>            
@@ -103,7 +162,7 @@ const listOfWeapons = await db.select().from(Armamento);
 
         </tr>
 
-        <tr class="bg-base-200 text-center *:border *:border-white">
+        <tr class="bg-base-200 text-center *:border *:border-white print:text-title">
           <th rowspan="3" class="col-arma-particular">TIPO</th>
           <th rowspan="3" class="col-arma-particular">MARCA</th>
           <th rowspan="3" class="col-arma-particular">MODELO</th>
@@ -145,7 +204,7 @@ const listOfWeapons = await db.select().from(Armamento);
           <th rowspan="3" class="col-cambiado-reasignado">FECHA</th>
         </tr>
 
-        <tr class="bg-base-200 text-center *:border *:border-white">
+        <tr class="bg-base-200 text-center *:border *:border-white print:text-title">
           <th rowspan="2" class="col-arma-particular">N° CAF</th>
           <th colspan="2" class="col-arma-particular">FECHA</th>
           <th rowspan="2" class="col-arma-particular">LIBRO</th>
@@ -160,7 +219,7 @@ const listOfWeapons = await db.select().from(Armamento);
           <th rowspan="2" class="col-arma-estado">FECHA EMISIÓN</th>
         </tr>
 
-        <tr class="bg-base-200 text-center *:border *:border-white">
+        <tr class="bg-base-200 text-center *:border *:border-white print:text-title">
           <th class="col-arma-particular">EXPEDIC.</th>
           <th class="col-arma-particular">CADUCA</th>
           <th class="col-arma-estado">EXPEDIC.</th>
@@ -175,7 +234,7 @@ const listOfWeapons = await db.select().from(Armamento);
           const weaponEst = listOfWeapons.find(w => w.personal_id === p.id && w.tipo_procedencia === 'ESTADO');
 
           return (
-            <tr class="hover:bg-base-300/50 transition-colors text-center text-xs *:border *:border-gray-500">
+            <tr class="text-center text-xs *:border *:border-gray-500">
               <th>{index + 1}</th>
               <td class="print:hidden p-0">
                 <div class="inline-flex items-center justify-center gap-1 h-full w-full py-1">
@@ -184,11 +243,10 @@ const listOfWeapons = await db.select().from(Armamento);
                 </div>
               </td>
 
-              <td class="col-foto p-0">
+              <td class="col-foto">
                 <div class="flex items-center justify-center h-full w-full">
                   <div class="avatar">
-                    <div class="block">
-                      <button class="cursor-pointer hover:scale-105 transition-transform p-3">
+                      <button class="cursor-pointer hover:scale-105 transition-transform">
                         {p.foto !== "--" ? (
                           <a href={p.foto} title="Ver Foto Completa" target="_blank" rel="noopener noreferrer">
                             <img
@@ -199,12 +257,11 @@ const listOfWeapons = await db.select().from(Armamento);
                           />
                           </a>
                         ) : (
-                          <span class="text-sm font-bold text-error leading-none text-center">
+                          <span class="text-xs font-bold text-error leading-none text-center">
                             NO<br/>FOTO
                           </span>
                         )}
                       </button>
-                    </div>
                   </div>
                 </div>
               </td>
@@ -214,7 +271,8 @@ const listOfWeapons = await db.select().from(Armamento);
               <td class="col-sede-depincri">{i.sede_depincri}</td>
               <td class="col-area-oficina">{i.area_oficina}</td>
               <td class="col-grado">{p.grado}</td>
-              <td class=" col-apellidos-nombres font-bold uppercase">{p.apellidos_nombres}</td>
+              <td class="col-apellidos-nombres text-nowrap">{p.apellidos_nombres}</td>
+              <td class="col-sexo">{p.sexo}</td>
               <td class="col-naturaleza">{p.distrito_nac}</td>
               <td class="col-naturaleza">{p.provincia_nac}</td>
               <td class="col-naturaleza">{p.depto_nac}</td>
@@ -223,7 +281,7 @@ const listOfWeapons = await db.select().from(Armamento);
               <td class="col-dni">{p.dni}</td>
               <td class="col-codigo-dni">{p.codigo_dni}</td>
               <td class="col-ingreso-pnp">{i.ingreso_pnp}</td>
-              <td class="col-egreso-pnp">{i.egreso_pnp}</td>
+              <td class="col-egreso-pnp text-nowrap">{i.egreso_pnp}</td>
               <td class="col-tiempo-servicio">{i.tiempo_servicio_anios}</td>
               <td class="col-tiempo-servicio">{i.tiempo_servicio_meses}</td>
               <td class="col-tiempo-servicio">{i.tiempo_servicio_dias}</td>
