@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { Armamento, db, eq, InfoPNP, Personal, VidaSocial } from 'astro:db';
+import { and, Armamento, db, eq, InfoPNP, Personal, VidaSocial } from 'astro:db';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -137,6 +137,60 @@ export const PUT: APIRoute = async ({ params, request }) => {
         reasig_fecha: String(data.reasig_fecha || ""),
       })
       .where(eq(VidaSocial.personal_id, id));
+    
+      // Log para ver qué datos están llegando del formulario antes de procesar
+      console.log("Datos recibidos para armas:", {
+        particular: data.arma_part_tipo,
+        estado: data.arma_est_tipo,
+        id_personal: id
+      });
+    try{
+    const resPart = await db.update(Armamento)
+      .set({
+        tipo_arma: String(data.arma_part_tipo || ""),
+        marca: String(data.arma_part_marca || ""),
+        modelo: String(data.arma_part_modelo || ""),
+        calibre: String(data.arma_part_calibre || ""),
+        serie: String(data.arma_part_serie || ""),
+        caf_num: String(data.arma_part_caf_num || ""),
+        caf_exped: String(data.arma_part_caf_exped || ""),
+        caf_caduca: String(data.arma_part_caf_caduca || ""),
+        caf_libro: String(data.arma_part_caf_libro || ""),
+        caf_folio: String(data.arma_part_caf_folio || ""),
+        tarjeta_num: String(data.arma_part_tarjeta_num || ""),
+        tarjeta_emision: String(data.arma_part_tarjeta_emision || ""),
+      })
+      .where(and(
+        eq(Armamento.personal_id, id),
+        eq(Armamento.tipo_procedencia, 'PARTICULAR')
+      ));
+      console.log("Resultado update Particular:", resPart);
+    // Actualizar Arma del Estado
+    const resEst =await db.update(Armamento)
+      .set({
+        tipo_arma: String(data.arma_est_tipo || ""),
+        marca: String(data.arma_est_marca || ""),
+        modelo: String(data.arma_est_modelo || ""),
+        calibre: String(data.arma_est_calibre || ""),
+        serie: String(data.arma_est_serie || ""),
+        caf_num: String(data.arma_est_caf_num || ""),
+        caf_exped: String(data.arma_est_caf_exped || ""),
+        caf_caduca: String(data.arma_est_caf_caduca || ""),
+        caf_libro: String(data.arma_est_caf_libro || ""),
+        caf_folio: String(data.arma_est_caf_folio || ""),
+        tarjeta_num: String(data.arma_est_tarjeta_num || ""),
+        tarjeta_emision: String(data.arma_est_tarjeta_emision || ""),
+      })
+      .where(and(
+        eq(Armamento.personal_id, id),
+        eq(Armamento.tipo_procedencia, 'ESTADO')
+      ));
+
+      console.log("Resultado update Estado:", resEst);
+
+      } catch (e) {
+  console.error("Error específico actualizando armas:", e);
+}
 
     return new Response(JSON.stringify({ message: "Éxito" }), { status: 200 });
 
