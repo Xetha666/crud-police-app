@@ -1,7 +1,6 @@
 ---
 import { Armamento, db, eq, InfoPNP, Personal, VidaSocial} from 'astro:db';
 
-// Realizamos el JOIN para traer Identidad, Info Laboral y Vida Social
 const allPersonal = await db.select()
   .from(Personal)
   .innerJoin(InfoPNP, eq(Personal.id, InfoPNP.personal_id))
@@ -9,6 +8,38 @@ const allPersonal = await db.select()
 
 // Traemos todo el armamento para mapearlo después
 const listOfWeapons = await db.select().from(Armamento);
+
+// FUNCIÓN DE CÁLCULO DINÁMICO
+function calcularDiferencia(fechaInicio: string | Date) {
+  if (!fechaInicio || fechaInicio === "" || fechaInicio === "--") return null;
+
+  const inicio = new Date(fechaInicio + "T00:00:00Z");
+  if (isNaN(inicio.getTime())) return null;
+  
+  //Hora actual en UTC
+  const now = new Date();
+  
+  //Hora de Perú (UTC - 5 horas)
+  const offsetPeru = -5 * 60 * 60 * 1000;
+  const today = new Date(now.getTime() + offsetPeru);
+
+  let anios = today.getUTCFullYear() - inicio.getUTCFullYear();
+  let meses = today.getUTCMonth() - inicio.getUTCMonth();
+  let dias = today.getUTCDate() - inicio.getUTCDate();
+
+  if (dias < 0) {
+    meses--;
+    // Obtenemos el último día del mes anterior usando UTC para evitar saltos de zona
+    const ultimoDiaMesAnterior = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), 0)).getUTCDate();
+    dias += ultimoDiaMesAnterior;
+  }
+  
+  if (meses < 0) {
+    anios--;
+    meses += 12;
+  }
+  return { anios, meses, dias };
+}
 ---
 
 <div class="p-4">
@@ -261,6 +292,8 @@ const listOfWeapons = await db.select().from(Armamento);
 
       <tbody class="select-none">
         {allPersonal.map(({ Personal: p, InfoPNP: i, VidaSocial: v }, index) => {
+        const tiempo = i.egreso_pnp ? calcularDiferencia(i.egreso_pnp) : { anios: 0, meses: 0, dias: 0 };
+        const datosNacimiento = p.fecha_nac ? calcularDiferencia(p.fecha_nac) : { anios: 0, meses: 0, dias: 0 };
           // Buscamos las armas asociadas a esta persona
           const weaponPart = listOfWeapons.find(w => w.personal_id === p.id && w.tipo_procedencia === 'PARTICULAR');
           const weaponEst = listOfWeapons.find(w => w.personal_id === p.id && w.tipo_procedencia === 'ESTADO');
@@ -309,14 +342,15 @@ const listOfWeapons = await db.select().from(Armamento);
               <td class="col-naturaleza">{p.provincia_nac}</td>
               <td class="col-naturaleza">{p.depto_nac}</td>
               <td class="col-fecha-nac">{p.fecha_nac}</td>
-              <td class="col-edad">{p.edad}</td>
+              <!--TODO: Arreglar el problema de que al borrar la fecha de nacimiento se renderiza 0 en vez de "" -->
+              <td class="col-edad">{datosNacimiento ? datosNacimiento.anios : ""}</td>
               <td class="col-dni">{p.dni}</td>
               <td class="col-codigo-dni">{p.codigo_dni}</td>
               <td class="col-ingreso-pnp">{i.ingreso_pnp}</td>
               <td class="col-egreso-pnp text-nowrap">{i.egreso_pnp}</td>
-              <td class="col-tiempo-servicio">{i.tiempo_servicio_anios}</td>
-              <td class="col-tiempo-servicio">{i.tiempo_servicio_meses}</td>
-              <td class="col-tiempo-servicio">{i.tiempo_servicio_dias}</td>
+              <td class="col-tiempo-servicio">{tiempo ? tiempo.anios : ""}</td>
+              <td class="col-tiempo-servicio">{tiempo ? tiempo.meses : ""}</td>
+              <td class="col-tiempo-servicio">{tiempo ? tiempo.dias : ""}</td>
               <td class="col-codigo-especialidad">{i.codigo_especialidad}</td>
               {/* CIP */}
               <td class="col-cip">{i.cip_antiguo_codofin}</td>
