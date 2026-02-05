@@ -1,8 +1,33 @@
 import { personalSchema } from '@/lib/schemas/personal';
 import type { APIRoute } from 'astro';
-import { Armamento, db, InfoPNP, Personal, VidaSocial } from 'astro:db';
+import { Armamento, db, eq, InfoPNP, Personal, VidaSocial } from 'astro:db';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+
+export async function GET() {
+  const allPersonal = await db.select().from(Personal).innerJoin(InfoPNP, eq(Personal.id, InfoPNP.personal_id));
+                                                    
+  const hoy = new Date();
+
+  const allPersonalWithServiceTime = allPersonal.map((personal) => {
+    const fechaEgreso = new Date(personal.InfoPNP.egreso_pnp);
+    
+    // Cálculo de años
+    let anios = hoy.getFullYear() - fechaEgreso.getFullYear();
+    const mes = hoy.getMonth() - fechaEgreso.getMonth();
+    
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaEgreso.getDate())) {
+      anios--;
+    }
+
+    return {
+      ...personal,
+      tiempo_servicio_actual: anios // Este dato siempre será fresco
+    };
+  });
+
+  return new Response(JSON.stringify(allPersonalWithServiceTime));
+}
 
 export const POST: APIRoute = async ({ request }) => {
   try {
