@@ -36,7 +36,7 @@ const InfoPNP = defineTable({
     sede_depincri: column.text(),
     area_oficina: column.text(),
     ingreso_pnp: column.text(),
-    egreso_pnp: column.text(),
+    egreso_pnp: column.date(), // Fecha de egreso en formato date para que podamos hacer cálculos
     tiempo_servicio_anios: column.text(),
     tiempo_servicio_meses: column.text(),
     tiempo_servicio_dias: column.text(),
